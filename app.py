@@ -365,12 +365,12 @@ if page == "Home":
         }
         skill_html = '<div class="skill-list">'
         for name, val in skills.items():
-            skill_html += f"""
-            <div class="skill-item">
-                <div class="skill-row"><span>{name}</span><span class="skill-pct">{val}%</span></div>
-                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:{val}%;"></div></div>
-            </div>
-            """
+            skill_html += (
+                f'<div class="skill-item">'
+                f'<div class="skill-row"><span>{name}</span><span class="skill-pct">{val}%</span></div>'
+                f'<div class="skill-bar-bg"><div class="skill-bar-fill" style="width:{val}%;"></div></div>'
+                f'</div>'
+            )
         skill_html += "</div>"
         st.markdown(skill_html, unsafe_allow_html=True)
 

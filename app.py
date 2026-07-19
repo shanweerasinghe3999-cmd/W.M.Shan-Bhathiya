@@ -161,7 +161,7 @@ st.markdown("""
     .landing-social a:hover { border-bottom: 1px solid #2E75B6; }
 
     .landing-right {
-        flex: 1 1 300px; min-width: 260px; height: 320px;
+        flex: 1 1 300px; min-width: 260px; height: 360px;
         display: flex; align-items: center; justify-content: center;
         position: relative;
     }
@@ -193,13 +193,17 @@ st.markdown("""
     .badge-tr { top: 8%; right: 6%; }
     .badge-bl { bottom: 12%; left: 4%; }
     .badge-br { bottom: 6%; right: 10%; }
+    .badge-top { top: -6%; left: 50%; transform: translateX(-50%); }
+    .badge-bottom { bottom: -10%; left: 50%; transform: translateX(-50%); }
+    .badge-left { top: 50%; left: -8%; transform: translateY(-50%); }
+    .badge-right { top: 50%; right: -8%; transform: translateY(-50%); }
 
     /* Responsive: smaller screens */
     @media (max-width: 900px) {
         .landing-hero { flex-direction: column; text-align: center; }
         .landing-desc { max-width: 100%; }
         .landing-cta-row { justify-content: center; }
-        .landing-right { height: 260px; }
+        .landing-right { height: 300px; }
         .landing-photo { width: 170px; height: 170px; }
         .ring-1 { width: 210px; height: 210px; }
         .ring-2 { width: 250px; height: 250px; }
@@ -238,7 +242,7 @@ with st.sidebar:
     st.markdown("---")
 
     # Page navigation
-    page = st.radio("Navigation", ["Home", "Experience", "Projects", "Contact", "Certifications"], index=0, label_visibility="collapsed")
+    page = st.radio("Navigation", ["Home", "Experience", "Projects", "Certifications", "Contact"], index=0, label_visibility="collapsed")
 
     st.markdown("---")
     st.markdown("##### 🔗 Quick Links")
@@ -286,6 +290,10 @@ if page == "Home":
             <div class="float-badge badge-tr"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></div>
             <div class="float-badge badge-bl"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular"></div>
             <div class="float-badge badge-br"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"></div>
+            <div class="float-badge badge-top"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"></div>
+            <div class="float-badge badge-bottom"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
+            <div class="float-badge badge-left"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
+            <div class="float-badge badge-right"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"></div>
             {photo_html}
         </div>
     </div>

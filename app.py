@@ -363,18 +363,18 @@ if page == "Home":
     with col3:
         st.subheader("Skills")
         skills = {
-            "Angular": 
-            "JavaScript": 
-            "TypeScript": 
-            "Python": 
-            "Java": 
-            "HTML / CSS": 
-            "Firebase": 
-            "SQL": 
-            "Git": 
-            "Power BI": 
-            "Tableau":
-            "UI/UX Design": 
+            "Angular": 76,
+            "JavaScript": 82,
+            "TypeScript": 75,
+            "Python": 84,
+            "Java": 75,
+            "HTML / CSS": 80,
+            "Firebase": 77,
+            "SQL": 78,
+            "Git": 81,
+            "Power BI": 75,
+            "Tableau": 72,
+            "UI/UX Design": 70,
         }
         skill_html = '<div class="skill-list">'
         for name, val in skills.items():

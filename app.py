@@ -3,6 +3,7 @@ from datetime import datetime
 from pathlib import Path
 import plotly.express as px
 import base64
+import math
 
 # -------------------- PAGE SETUP --------------------
 st.set_page_config(
@@ -161,12 +162,12 @@ st.markdown("""
     .landing-social a:hover { border-bottom: 1px solid #2E75B6; }
 
     .landing-right {
-        flex: 1 1 300px; min-width: 260px; height: 360px;
+        flex: 1 1 340px; min-width: 320px; height: 420px;
         display: flex; align-items: center; justify-content: center;
         position: relative;
     }
     .landing-photo {
-        width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
+        width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
         border: 6px solid #ffffff; box-shadow: 0 10px 30px rgba(46,117,182,0.25);
         position: relative; z-index: 2;
     }
@@ -178,35 +179,29 @@ st.markdown("""
         position: absolute; border: 1.5px dashed #9FC4EA; border-radius: 50%;
         top: 50%; left: 50%; z-index: 1;
     }
-    .ring-1 { width: 270px; height: 270px; transform: translate(-50%, -50%); }
-    .ring-2 { width: 320px; height: 320px; transform: translate(-50%, -50%) rotate(20deg); }
+    .ring-1 { width: 250px; height: 250px; transform: translate(-50%, -50%); }
+    .ring-2 { width: 300px; height: 300px; transform: translate(-50%, -50%) rotate(20deg); }
     .float-badge {
         position: absolute; z-index: 3;
         background: #ffffff; border-radius: 50%;
-        width: 50px; height: 50px;
+        width: 38px; height: 38px;
         display: flex; align-items: center; justify-content: center;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.16);
         border: 1px solid #E4EEF9;
     }
-    .float-badge img { width: 26px; height: 26px; object-fit: contain; }
-    .badge-tl { top: 4%; left: 8%; }
-    .badge-tr { top: 8%; right: 6%; }
-    .badge-bl { bottom: 12%; left: 4%; }
-    .badge-br { bottom: 6%; right: 10%; }
-    .badge-top { top: -6%; left: 50%; transform: translateX(-50%); }
-    .badge-bottom { bottom: -10%; left: 50%; transform: translateX(-50%); }
-    .badge-left { top: 50%; left: -8%; transform: translateY(-50%); }
-    .badge-right { top: 50%; right: -8%; transform: translateY(-50%); }
+    .float-badge img { width: 20px; height: 20px; object-fit: contain; }
 
     /* Responsive: smaller screens */
     @media (max-width: 900px) {
         .landing-hero { flex-direction: column; text-align: center; }
         .landing-desc { max-width: 100%; }
         .landing-cta-row { justify-content: center; }
-        .landing-right { height: 300px; }
-        .landing-photo { width: 170px; height: 170px; }
-        .ring-1 { width: 210px; height: 210px; }
-        .ring-2 { width: 250px; height: 250px; }
+        .landing-right { height: 340px; min-width: 280px; }
+        .landing-photo { width: 150px; height: 150px; }
+        .ring-1 { width: 190px; height: 190px; }
+        .ring-2 { width: 230px; height: 230px; }
+        .float-badge { width: 32px; height: 32px; }
+        .float-badge img { width: 17px; height: 17px; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -264,6 +259,35 @@ with st.sidebar:
 # -------------------- HOME PAGE --------------------
 if page == "Home":
     photo_html = f'<img src="data:image/jpeg;base64,{_profile_b64}" class="landing-photo">' if _profile_b64 else '<div class="landing-photo landing-photo-placeholder">📷</div>'
+
+    _skill_badges = [
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", "Python"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "JavaScript"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "TypeScript"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg", "Angular"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", "Java"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "HTML5"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "Git"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "Firebase"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "Figma"),
+        ("https://cdn.simpleicons.org/powerbi/F2C811", "Power BI"),
+        ("https://cdn.simpleicons.org/tableau/E97627", "Tableau"),
+        ("https://cdn.simpleicons.org/microsoftword/2B579A", "Word"),
+        ("https://cdn.simpleicons.org/microsoftexcel/217346", "Excel"),
+        ("https://cdn.simpleicons.org/microsoftpowerpoint/B7472A", "PowerPoint"),
+    ]
+    _n = len(_skill_badges)
+    _radius = 47  # percent from center
+    badge_html = ""
+    for _i, (_url, _alt) in enumerate(_skill_badges):
+        _angle = (2 * math.pi * _i / _n) - (math.pi / 2)
+        _x = 50 + _radius * math.cos(_angle)
+        _y = 50 + _radius * math.sin(_angle)
+        badge_html += (
+            f'<div class="float-badge" style="top:{_y:.1f}%; left:{_x:.1f}%; '
+            f'transform: translate(-50%,-50%);"><img src="{_url}" alt="{_alt}"></div>'
+        )
+
     st.markdown(f"""
     <div class="landing-hero">
         <div class="landing-left">
@@ -286,17 +310,11 @@ if page == "Home":
         <div class="landing-right">
             <div class="deco-ring ring-1"></div>
             <div class="deco-ring ring-2"></div>
-            <div class="float-badge badge-tl"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div>
-            <div class="float-badge badge-tr"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></div>
-            <div class="float-badge badge-bl"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular"></div>
-            <div class="float-badge badge-br"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"></div>
-            <div class="float-badge badge-top"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript"></div>
-            <div class="float-badge badge-bottom"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"></div>
-            <div class="float-badge badge-left"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"></div>
-            <div class="float-badge badge-right"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"></div>
+            {badge_html}
             {photo_html}
         </div>
     </div>
+
     """, unsafe_allow_html=True)
 
     st.markdown("""

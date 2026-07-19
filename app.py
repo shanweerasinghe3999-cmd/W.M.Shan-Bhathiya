@@ -20,59 +20,59 @@ st.markdown("""
 
     /* Headers with accent underline */
     h1, h2, h3 { font-weight: 800; letter-spacing: -0.3px; }
-    h2, h3 { border-bottom: 3px solid #14B8B8; padding-bottom: 6px; margin-top: 4px; color: #0B5E5E !important; }
+    h2, h3 { border-bottom: 3px solid #4A90D9; padding-bottom: 6px; margin-top: 4px; color: #1B4A7A !important; }
 
     /* Links */
-    a, .stMarkdown a { color: #0E9494 !important; font-weight: 600; }
+    a, .stMarkdown a { color: #2E75B6 !important; font-weight: 600; }
 
     /* Metric cards */
     div[data-testid="stMetric"] {
-        background: #EAFBFB;
-        border: 1px solid #B9EDED;
+        background: #EEF5FC;
+        border: 1px solid #CFE2F5;
         border-radius: 10px;
         padding: 14px 16px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
-    div[data-testid="stMetricLabel"] { color: #0B5E5E; font-weight: 600; }
-    div[data-testid="stMetricValue"] { color: #0E9494; font-weight: 800; }
+    div[data-testid="stMetricLabel"] { color: #1B4A7A; font-weight: 600; }
+    div[data-testid="stMetricValue"] { color: #2E75B6; font-weight: 800; }
 
     /* Containers / cards used for projects & certifications */
     div[data-testid="stVerticalBlockBorderWrapper"] {
         border-radius: 12px !important;
-        border-color: #B9EDED !important;
-        box-shadow: 0 2px 6px rgba(20,184,184,0.10);
+        border-color: #CFE2F5 !important;
+        box-shadow: 0 2px 6px rgba(46,117,182,0.10);
     }
 
     /* Sidebar polish */
     section[data-testid="stSidebar"] {
-        border-right: 1px solid #B9EDED;
-        background: #F4FDFD;
+        border-right: 1px solid #CFE2F5;
+        background: #F6FAFE;
     }
-    section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2 { color: #0B5E5E !important; }
+    section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2 { color: #1B4A7A !important; }
 
-    /* Circular sidebar profile photo */
+    /* Sidebar profile photo - plain rounded corners, not circular */
     section[data-testid="stSidebar"] img {
-        border-radius: 50% !important;
-        border: 4px solid #14B8B8;
-        box-shadow: 0 4px 12px rgba(20,184,184,0.25);
+        border-radius: 10px !important;
+        border: 3px solid #4A90D9;
+        box-shadow: 0 4px 12px rgba(74,144,217,0.20);
         object-fit: cover;
     }
 
     /* Buttons */
     button[kind="secondaryFormSubmit"], .stButton>button, .stDownloadButton>button, .stLinkButton>a {
-        background-color: #14B8B8 !important; color: white !important;
+        background-color: #2E75B6 !important; color: white !important;
         border-radius: 8px !important; border: none !important; font-weight: 700 !important;
     }
 
     /* Progress bars */
-    div[data-testid="stProgress"] > div > div { background-color: #14B8B8 !important; }
+    div[data-testid="stProgress"] > div > div { background-color: #4A90D9 !important; }
 
     /* Divider spacing */
-    hr { margin: 18px 0; border-color: #B9EDED; }
+    hr { margin: 18px 0; border-color: #CFE2F5; }
 
     /* Hero gradient banner */
     .hero-banner {
-        background: linear-gradient(135deg, #0B5E5E 0%, #14B8B8 55%, #5EE6D0 100%);
+        background: linear-gradient(135deg, #1B4A7A 0%, #2E75B6 55%, #7FB3E8 100%);
         border-radius: 18px;
         padding: 46px 44px 60px 44px;
         position: relative;
@@ -90,7 +90,7 @@ st.markdown("""
     }
     .hero-photo {
         position: absolute; bottom: -36px; right: 48px;
-        width: 96px; height: 96px; border-radius: 50%;
+        width: 96px; height: 96px; border-radius: 10px;
         object-fit: cover; border: 4px solid #ffffff;
         box-shadow: 0 6px 16px rgba(0,0,0,0.18);
     }
@@ -99,10 +99,10 @@ st.markdown("""
     }
     .stat-icon-item { text-align: center; min-width: 70px; }
     .stat-icon-item .icon { font-size: 26px; }
-    .stat-icon-item .label { font-size: 12px; color: #0B5E5E; font-weight: 700; margin-top: 4px; }
+    .stat-icon-item .label { font-size: 12px; color: #1B4A7A; font-weight: 700; margin-top: 4px; }
     .big-stat-row { display: flex; gap: 50px; margin: 4px 0 30px 4px; flex-wrap: wrap; }
-    .big-stat-item .num { font-size: 34px; font-weight: 800; color: #0E9494; line-height: 1; }
-    .big-stat-item .label { font-size: 13px; color: #0B5E5E; font-weight: 700; margin-top: 4px; }
+    .big-stat-item .num { font-size: 34px; font-weight: 800; color: #2E75B6; line-height: 1; }
+    .big-stat-item .label { font-size: 13px; color: #1B4A7A; font-weight: 700; margin-top: 4px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -121,7 +121,7 @@ with st.sidebar:
     # Put your photo file in the same folder as this app.py and change the filename below
     img_path = Path(__file__).parent / "profile.jpg"
     if img_path.exists():
-        st.image(str(img_path), width=130, caption="Bachelor of Applied IT")
+        st.image(str(img_path), width=150, caption="Bachelor of Applied IT")
     else:
         st.info("Add your photo as 'profile.jpg' in the same folder as app.py")
 
@@ -187,12 +187,22 @@ if page == "Home":
 
     col1, col2, col3 = st.columns([1, 2, 1])
 
-    # --- Column 1: Highlights ---
+    # --- Column 1: Highlights + small Experience chart ---
     with col1:
         st.subheader("⭐ Highlights")
         st.write("• Built full IoT-to-cloud energy system")
         st.write("• Certified in Python & Web Design")
         st.write("• Hands-on with hardware & software both")
+
+        st.markdown("---")
+        st.subheader("📈 Experience Overview")
+        data = {
+            "Year": ["2023", "2024", "2025", "2026"],
+            "Projects": [1, 2, 3, 4],
+        }
+        fig = px.line(data, x="Year", y="Projects", markers=True, title="Projects Completed per Year")
+        fig.update_layout(height=220, margin=dict(l=10, r=10, t=30, b=10))
+        st.plotly_chart(fig, use_container_width=True)
 
     # --- Column 2: Main Content ---
     with col2:
@@ -205,15 +215,6 @@ if page == "Home":
             "design and delivery of a cloud-based IoT energy management system from sensor to dashboard, "
             "then defended it at VIVA."
         )
-
-        st.markdown("---")
-        st.subheader("📈 Experience Overview")
-        data = {
-            "Year": ["2023", "2024", "2025", "2026"],
-            "Projects": [1, 2, 3, 4],
-        }
-        fig = px.line(data, x="Year", y="Projects", markers=True, title="Projects Completed per Year")
-        st.plotly_chart(fig, use_container_width=True)
 
     # --- Column 3: Skills ---
     with col3:
@@ -230,12 +231,12 @@ if page == "Home":
             st.write(name)
             st.progress(val)
 
-        st.markdown("---")
-        st.subheader("📬 Contact")
-        st.write("📧 shanweerasinghe3999@gmail.com")
-        st.write("📞 0789728257")
-        st.write("🌐 [LinkedIn](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
-        st.write("💻 [GitHub](https://github.com/shanweerasinghe3999-cmd)")
+    st.markdown("---")
+    st.subheader("📬 Contact")
+    st.write("📧 shanweerasinghe3999@gmail.com")
+    st.write("📞 0789728257")
+    st.write("🌐 [LinkedIn](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
+    st.write("💻 [GitHub](https://github.com/shanweerasinghe3999-cmd)")
 
 # -------------------- PROJECTS PAGE --------------------
 elif page == "Projects":

@@ -162,12 +162,12 @@ st.markdown("""
     .landing-social a:hover { border-bottom: 1px solid #2E75B6; }
 
     .landing-right {
-        flex: 1 1 340px; min-width: 320px; height: 420px;
+        flex: 1 1 380px; min-width: 380px; height: 400px;
         display: flex; align-items: center; justify-content: center;
         position: relative;
     }
     .landing-photo {
-        width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
+        width: 190px; height: 190px; border-radius: 50%; object-fit: cover;
         border: 6px solid #ffffff; box-shadow: 0 10px 30px rgba(46,117,182,0.25);
         position: relative; z-index: 2;
     }
@@ -179,8 +179,8 @@ st.markdown("""
         position: absolute; border: 1.5px dashed #9FC4EA; border-radius: 50%;
         top: 50%; left: 50%; z-index: 1;
     }
-    .ring-1 { width: 250px; height: 250px; transform: translate(-50%, -50%); }
-    .ring-2 { width: 300px; height: 300px; transform: translate(-50%, -50%) rotate(20deg); }
+    .ring-1 { width: 230px; height: 230px; transform: translate(-50%, -50%); }
+    .ring-2 { width: 270px; height: 270px; transform: translate(-50%, -50%) rotate(20deg); }
     .float-badge {
         position: absolute; z-index: 3;
         background: #ffffff; border-radius: 50%;
@@ -196,12 +196,10 @@ st.markdown("""
         .landing-hero { flex-direction: column; text-align: center; }
         .landing-desc { max-width: 100%; }
         .landing-cta-row { justify-content: center; }
-        .landing-right { height: 340px; min-width: 280px; }
+        .landing-right { height: 360px; min-width: 340px; }
         .landing-photo { width: 150px; height: 150px; }
         .ring-1 { width: 190px; height: 190px; }
         .ring-2 { width: 230px; height: 230px; }
-        .float-badge { width: 32px; height: 32px; }
-        .float-badge img { width: 17px; height: 17px; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -270,23 +268,38 @@ if page == "Home":
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "Git"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "Firebase"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "Figma"),
-        ("https://cdn.simpleicons.org/powerbi/F2C811", "Power BI"),
-        ("https://cdn.simpleicons.org/tableau/E97627", "Tableau"),
-        ("https://cdn.simpleicons.org/microsoftword/2B579A", "Word"),
-        ("https://cdn.simpleicons.org/microsoftexcel/217346", "Excel"),
-        ("https://cdn.simpleicons.org/microsoftpowerpoint/B7472A", "PowerPoint"),
     ]
-    _n = len(_skill_badges)
-    _radius = 47  # percent from center
+    # Text-badge fallback for tools without a reliable free icon CDN
+    _text_badges = [
+        ("PBI", "#F2C811", "#3a2f00", "Power BI"),
+        ("TAB", "#E97627", "#ffffff", "Tableau"),
+        ("W", "#2B579A", "#ffffff", "Word"),
+        ("X", "#217346", "#ffffff", "Excel"),
+        ("P", "#B7472A", "#ffffff", "PowerPoint"),
+    ]
+    _n = len(_skill_badges) + len(_text_badges)
+    _radius_px = 175  # pixels from center - clear of the ring
     badge_html = ""
-    for _i, (_url, _alt) in enumerate(_skill_badges):
+    _i = 0
+    for _url, _alt in _skill_badges:
         _angle = (2 * math.pi * _i / _n) - (math.pi / 2)
-        _x = 50 + _radius * math.cos(_angle)
-        _y = 50 + _radius * math.sin(_angle)
+        _x = _radius_px * math.cos(_angle)
+        _y = _radius_px * math.sin(_angle)
         badge_html += (
-            f'<div class="float-badge" style="top:{_y:.1f}%; left:{_x:.1f}%; '
+            f'<div class="float-badge" style="left:calc(50% + {_x:.0f}px); top:calc(50% + {_y:.0f}px); '
             f'transform: translate(-50%,-50%);"><img src="{_url}" alt="{_alt}"></div>'
         )
+        _i += 1
+    for _label, _bg, _fg, _alt in _text_badges:
+        _angle = (2 * math.pi * _i / _n) - (math.pi / 2)
+        _x = _radius_px * math.cos(_angle)
+        _y = _radius_px * math.sin(_angle)
+        badge_html += (
+            f'<div class="float-badge" title="{_alt}" style="left:calc(50% + {_x:.0f}px); top:calc(50% + {_y:.0f}px); '
+            f'transform: translate(-50%,-50%); background:{_bg}; color:{_fg}; '
+            f'font-weight:800; font-size:11px;">{_label}</div>'
+        )
+        _i += 1
 
     st.markdown(f"""
     <div class="landing-hero">

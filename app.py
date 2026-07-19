@@ -321,32 +321,32 @@ if page == "Home":
     with col2:
         st.subheader("👋 About Me")
         st.write(
-            "Hello! I'm Shan Weerasinghe, an Applied Information Technology undergraduate at SLTC "
-            "Research University with a passion for building innovative and user-friendly software "
-            "solutions."
+            "Hello! I'm Shan Bhathiya Nawarthna, a Bachelor of Applied Information Technology (DAIT) "
+            "undergraduate at SLTC Research University with a passion for developing innovative "
+            "software solutions and transforming data into meaningful insights."
         )
         st.write(
-            "I have a strong interest in web development, software engineering, Internet of Things "
-            "(IoT), data analytics, and artificial intelligence. I enjoy learning new technologies and "
-            "applying them to real-world projects that create meaningful impact."
+            "My interests include Software Engineering, Web Development, Business Intelligence (BI), "
+            "Data Science, Data Analytics, Artificial Intelligence (AI), and the Internet of Things "
+            "(IoT). I enjoy designing applications, analyzing data, and creating interactive "
+            "dashboards that help organizations make better data-driven decisions."
         )
         st.write(
-            "My technical skills include Angular, JavaScript, TypeScript, Python, Java, HTML, CSS, "
-            "Firebase, SQL, and Git. Through academic and personal projects, I have gained experience "
-            "in developing responsive web applications, IoT-based systems, and data-driven solutions "
-            "while strengthening my problem-solving and teamwork skills."
+            "I have experience working with Angular, JavaScript, TypeScript, Python, Java, HTML, CSS, "
+            "SQL, Firebase, Git, Power BI, and Tableau. I am familiar with data analysis, data "
+            "visualization, dashboard development, database management, and business intelligence "
+            "concepts, allowing me to transform complex datasets into valuable insights."
         )
         st.write(
-            "I am a motivated, detail-oriented, and lifelong learner who is always looking for "
-            "opportunities to grow professionally and contribute to innovative technology projects."
+            "Through academic and personal projects, I have developed web applications, IoT-based "
+            "systems, cloud solutions, and data-driven applications while improving my skills in "
+            "software development, problem-solving, analytical thinking, and teamwork."
         )
         st.write(
-            "When I'm not coding, I enjoy exploring new technologies, improving my development skills, "
-            "and working on projects that challenge me to think creatively."
-        )
-        st.write(
-            "I'm excited to begin my career as a Software Engineer and collaborate with teams that "
-            "build impactful digital solutions."
+            "I am a motivated and continuous learner who is always eager to explore emerging "
+            "technologies and enhance my technical skills. My career goal is to become a Software "
+            "Engineer, Data Analyst, Business Intelligence Developer, or Data Scientist and "
+            "contribute to creating innovative technology solutions that deliver real-world value."
         )
 
     # --- Column 3: Skills ---
@@ -362,6 +362,8 @@ if page == "Home":
             "Firebase": 77,
             "SQL": 78,
             "Git": 81,
+            "Power BI": 75,
+            "Tableau": 72,
         }
         skill_html = '<div class="skill-list">'
         for name, val in skills.items():
@@ -373,6 +375,50 @@ if page == "Home":
             )
         skill_html += "</div>"
         st.markdown(skill_html, unsafe_allow_html=True)
+
+    st.markdown("---")
+    col_exp, col_edu = st.columns(2)
+
+    with col_exp:
+        st.subheader("💼 Work Experience")
+        with st.container(border=True):
+            st.write("**Union Bank** | Pettah")
+            st.caption("2019 – 2020")
+            st.write("Personal Banking Advisor at the sales & credit card unit.")
+        with st.container(border=True):
+            st.write("**Reebonn Lanka Pvt Ltd.** | Malabe")
+            st.caption("May 2024 – December 2024")
+            st.write("Data Entry Operator at the Production Department.")
+
+        st.markdown("---")
+        st.subheader("🧰 Additional Skills")
+        with st.container(border=True):
+            st.write("• Microsoft Office (Word, Excel, PowerPoint)")
+            st.write("• SAP software experience")
+            st.write("• Data entry with high accuracy")
+            st.write("• Good communication skills")
+            st.write("• Basic IT knowledge")
+
+    with col_edu:
+        st.subheader("🎓 Education")
+        with st.container(border=True):
+            st.write("**Bachelor of Applied IT**")
+            st.caption("SLTC Research University, Padukka · 2023 – Present")
+        with st.container(border=True):
+            st.write("**GCE Advanced Level** (2021)")
+            st.caption("History of Sri Lanka & India: B · Geography: C · Buddhist Civilization: C")
+        with st.container(border=True):
+            st.write("**GCE Advanced Level** (2019) — Dharmapala College, Pannipitiya")
+            st.caption("Chemistry: S · English: S")
+        with st.container(border=True):
+            st.write("**GCE Ordinary Level** (2015) — President College, Maharagama")
+            st.caption("7 A's & 2 C's")
+        with st.container(border=True):
+            st.write("**Diploma in English** — British Way English Academy")
+            st.caption("December 2022 – February 2023")
+        with st.container(border=True):
+            st.write("Basic Computer Course — Zonal ICT Education Center, Sri Jayawardhanapura Zone")
+            st.write("Computer Literacy Course — Open University of Sri Lanka")
 
     st.markdown("---")
     st.subheader("📬 Contact")

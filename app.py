@@ -150,9 +150,9 @@ st.markdown("""
     .landing-accent { color: #2E75B6; }
     .landing-desc { color: #4c6b8a; font-size: 15px; max-width: 460px; margin-bottom: 22px; }
     .landing-cta-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-    .landing-cta-btn {
-        background: #12233D; color: #ffffff !important; padding: 12px 26px;
-        border-radius: 30px; font-weight: 700; font-size: 14px; text-decoration: none !important;
+    .landing-cta-plain {
+        color: #12233D !important; font-weight: 700; font-size: 15px;
+        text-decoration: none !important; border-bottom: 2px solid #2E75B6; padding-bottom: 2px;
     }
     .landing-social a {
         margin-right: 16px; color: #12233D !important; font-weight: 600; font-size: 13px;
@@ -274,7 +274,7 @@ if page == "Home":
                 web development, networking, cyber security, and embedded hardware.
             </p>
             <div class="landing-cta-row">
-                <a href="#about-me" class="landing-cta-btn">About Me</a>
+                <a href="#about-me" class="landing-cta-plain">About Me</a>
                 <span class="landing-social">
                     <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>
                     <a href="https://github.com/shanweerasinghe3999-cmd" target="_blank">GitHub</a>
@@ -311,7 +311,7 @@ if page == "Home":
         st.write("• Hands-on with hardware & software both")
 
         st.markdown("---")
-        st.subheader("📈 Experience Overview")
+        st.markdown('<h3 style="white-space: nowrap; font-size: 19px;">📈 Experience Overview</h3>', unsafe_allow_html=True)
         data = {
             "Year": ["2023", "2024", "2025", "2026"],
             "Projects": [1, 2, 3, 4],
@@ -326,7 +326,7 @@ if page == "Home":
         st.write(
             "Final-year Bachelor of Applied IT undergraduate at SLTC Research University, Padukka. "
             "Rather than staying in one lane, I've built real, working projects across web development, "
-            "programming, networking, cyber security, and embedded hardware and I enjoy the range more "
+            "programming, networking, cyber security, and embedded hardware — and I enjoy the range more "
             "than specializing narrowly. As Group Leader of a four-person final-year team, I led the "
             "design and delivery of a cloud-based IoT energy management system from sensor to dashboard, "
             "then defended it at VIVA."
@@ -336,23 +336,16 @@ if page == "Home":
     with col3:
         st.subheader("Skills")
         skills = {
-            "Python": 75,
-            "React / Web Dev": 65,
-            "Networking": 60,
-            "Cyber Security": 55,
-            "IoT / Embedded": 65,
-            "Cloud (Firebase/AWS)": 50,
+            "Python": 0.75,
+            "React / Web Dev": 0.65,
+            "Networking": 0.60,
+            "Cyber Security": 0.55,
+            "IoT / Embedded": 0.65,
+            "Cloud (Firebase/AWS)": 0.50,
         }
-        skill_html = '<div class="skill-list">'
         for name, val in skills.items():
-            skill_html += f"""
-            <div class="skill-item">
-                <div class="skill-row"><span>{name}</span><span class="skill-pct">{val}%</span></div>
-                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:{val}%;"></div></div>
-            </div>
-            """
-        skill_html += "</div>"
-        st.markdown(skill_html, unsafe_allow_html=True)
+            st.write(name)
+            st.progress(val)
 
     st.markdown("---")
     st.subheader("📬 Contact")

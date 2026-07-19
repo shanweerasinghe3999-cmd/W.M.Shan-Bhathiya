@@ -16,6 +16,17 @@ st.markdown("""
 <style>
     p, li, .stMarkdown, .stCaption { text-align: justify; }
 
+    /* Sidebar text: left-align + proper wrapping (justify stretches badly in narrow sidebar) */
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] li,
+    section[data-testid="stSidebar"] .stMarkdown,
+    section[data-testid="stSidebar"] .stCaption {
+        text-align: left !important;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.6;
+    }
+
     html, body, [class*="css"] { font-family: 'Segoe UI', 'Inter', sans-serif; }
 
     /* Headers with accent underline */
@@ -110,6 +121,16 @@ st.markdown("""
     .big-stat-row { display: flex; gap: 50px; margin: 4px 0 30px 4px; flex-wrap: wrap; }
     .big-stat-item .num { font-size: 34px; font-weight: 800; color: #2E75B6; line-height: 1; }
     .big-stat-item .label { font-size: 13px; color: #1B4A7A; font-weight: 700; margin-top: 4px; }
+
+    /* Responsive: smaller screens */
+    @media (max-width: 900px) {
+        .hero-banner { padding: 30px 24px 70px 24px; }
+        .hero-banner h1 { font-size: 26px; }
+        .hero-banner p { font-size: 14px; max-width: 100%; }
+        .hero-photo { width: 72px; height: 72px; bottom: -28px; right: 24px; }
+        .big-stat-row { gap: 30px; }
+        .big-stat-item .num { font-size: 26px; }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -227,12 +248,12 @@ if page == "Home":
     with col3:
         st.subheader("Skills")
         skills = {
-            "Python": 0.85,
-            "React / Web Dev": 0.80,
-            "Networking": 0.78,
-            "Cyber Security": 0.75,
-            "IoT / Embedded": 0.80,
-            "Cloud (Firebase/AWS)": 0.72,
+            "Python": 0.75,
+            "React / Web Dev": 0.65,
+            "Networking": 0.60,
+            "Cyber Security": 0.55,
+            "IoT / Embedded": 0.65,
+            "Cloud (Firebase/AWS)": 0.50,
         }
         for name, val in skills.items():
             st.write(name)

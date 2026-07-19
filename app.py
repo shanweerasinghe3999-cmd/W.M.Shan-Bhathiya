@@ -2,6 +2,7 @@ import streamlit as st
 from datetime import datetime
 from pathlib import Path
 import plotly.express as px
+import base64
 
 # -------------------- PAGE SETUP --------------------
 st.set_page_config(
@@ -48,8 +49,50 @@ st.markdown("""
 
     /* Divider spacing */
     hr { margin: 18px 0; border-color: #dbe6f2; }
+
+    /* Hero gradient banner */
+    .hero-banner {
+        background: linear-gradient(135deg, #16327a 0%, #2E75B6 55%, #5EA6E6 100%);
+        border-radius: 18px;
+        padding: 46px 44px 60px 44px;
+        position: relative;
+        margin-bottom: 46px;
+        color: #ffffff;
+        overflow: visible;
+    }
+    .hero-banner h1 {
+        font-size: 36px; margin: 0 0 8px 0; color: #ffffff !important;
+        border-bottom: none; padding-bottom: 0; line-height: 1.15;
+    }
+    .hero-banner p {
+        font-size: 16px; opacity: 0.92; margin: 0; text-align: left;
+        max-width: 560px;
+    }
+    .hero-photo {
+        position: absolute; bottom: -36px; right: 48px;
+        width: 96px; height: 96px; border-radius: 50%;
+        object-fit: cover; border: 4px solid #ffffff;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+    .stat-icon-row {
+        display: flex; gap: 44px; margin: 10px 0 36px 4px; flex-wrap: wrap;
+    }
+    .stat-icon-item { text-align: center; min-width: 70px; }
+    .stat-icon-item .icon { font-size: 26px; }
+    .stat-icon-item .label { font-size: 12px; color: #4c6b8a; margin-top: 4px; }
+    .big-stat-row { display: flex; gap: 50px; margin: 4px 0 30px 4px; flex-wrap: wrap; }
+    .big-stat-item .num { font-size: 32px; font-weight: 800; color: #16327a; line-height: 1; }
+    .big-stat-item .label { font-size: 13px; color: #4c6b8a; margin-top: 4px; }
 </style>
 """, unsafe_allow_html=True)
+
+def _img_b64(path):
+    if path.exists():
+        with open(path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    return None
+
+_profile_b64 = _img_b64(Path(__file__).parent / "profile.jpg")
 
 # -------------------- SIDEBAR --------------------
 with st.sidebar:
@@ -100,15 +143,33 @@ with st.sidebar:
 
 # -------------------- HOME PAGE --------------------
 if page == "Home":
+    photo_html = f'<img src="data:image/jpeg;base64,{_profile_b64}" class="hero-photo">' if _profile_b64 else ""
+    st.markdown(f"""
+    <div class="hero-banner">
+        <h1>W.M. Shan Bhathiya<br>Nawarathna Weerasinghe</h1>
+        <p>Versatile Tech Builder — Web · Networking · Security · Hardware</p>
+        {photo_html}
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="big-stat-row">
+        <div class="big-stat-item"><div class="num">1</div><div class="label">Major Project</div></div>
+        <div class="big-stat-item"><div class="num">3</div><div class="label">Certifications</div></div>
+    </div>
+    <div class="stat-icon-row">
+        <div class="stat-icon-item"><div class="icon">🌐</div><div class="label">Web Dev</div></div>
+        <div class="stat-icon-item"><div class="icon">📡</div><div class="label">Networking</div></div>
+        <div class="stat-icon-item"><div class="icon">🔒</div><div class="label">Security</div></div>
+        <div class="stat-icon-item"><div class="icon">🔧</div><div class="label">Hardware / IoT</div></div>
+    </div>
+    """, unsafe_allow_html=True)
+
     col1, col2, col3 = st.columns([1, 2, 1])
 
-    # --- Column 1: Quick stats ---
+    # --- Column 1: Highlights ---
     with col1:
-        st.subheader("📊 Quick Stats")
-        st.metric("Major Projects", "1")
-        st.metric("Certifications", "3")
-        st.markdown("---")
-        st.subheader("Highlights")
+        st.subheader("⭐ Highlights")
         st.write("• Built full IoT-to-cloud energy system")
         st.write("• Certified in Python & Web Design")
         st.write("• Hands-on with hardware & software both")
@@ -166,14 +227,14 @@ elif page == "Projects":
         st.write(
             "An end-to-end IoT energy monitoring platform: ESP32 with ACS712 current and DHT11 sensors "
             "feeding live readings to Firebase, controlled through a 4-channel relay, surfaced in a React "
-            "dashboard with a rule-based AI analysis engine and CEB billing at LKR 2.50/kWh."
+            "dashboard with a rule-based AI analysis engine that estimates the monthly bill."
         )
         st.write("• Customer registration & persistent usage history")
         st.write("• Rule-based AI engine for anomaly & usage insights")
         st.write("• Deployed dashboard on Netlify")
-        st.write("• Defended at VIVA — July 11, 2026")
         st.write("**Tech:** ESP32, Firebase, React, Netlify, IoT")
-        st.link_button("🔗 View Live Project", "https://thunderous-pastelito-6b0907.netlify.app/")
+        st.link_button("🔗 View Live Project (Demo Version)", "https://thunderous-pastelito-6b0907.netlify.app/")
+        st.caption("Note: this is a demo version of the project.")
 
 # -------------------- CERTIFICATIONS PAGE --------------------
 elif page == "Certifications":

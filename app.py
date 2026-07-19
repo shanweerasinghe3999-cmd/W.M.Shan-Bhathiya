@@ -268,11 +268,11 @@ if page == "Home":
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "Git"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "Firebase"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "Figma"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/powerbi.svg", "Power BI"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/tableau.svg", "Tableau"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/microsoftword.svg", "Word"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/microsoftexcel.svg", "Excel"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/microsoftpowerpoint.svg", "PowerPoint"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/powerbi.svg", "Power BI"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tableau.svg", "Tableau"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftword.svg", "Word"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftexcel.svg", "Excel"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftpowerpoint.svg", "PowerPoint"),
     ]
     _n = len(_skill_badges)
     _radius_px = 175  # pixels from center - clear of the ring

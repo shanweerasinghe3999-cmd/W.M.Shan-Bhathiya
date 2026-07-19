@@ -182,7 +182,7 @@ st.markdown("""
     .ring-2 { width: 320px; height: 320px; transform: translate(-50%, -50%) rotate(20deg); }
     .float-badge {
         position: absolute; z-index: 3;
-        background: #12233D; color: #ffffff; font-weight: 800; font-size: 12px;
+        background: #12233D; color: #ffffff; font-weight: 800; font-size: 20px;
         width: 44px; height: 44px; border-radius: 12px;
         display: flex; align-items: center; justify-content: center;
         box-shadow: 0 6px 14px rgba(0,0,0,0.18);
@@ -236,7 +236,7 @@ with st.sidebar:
     st.markdown("---")
 
     # Page navigation
-    page = st.radio("📂 Navigation", ["Home", "Projects", "Certifications", "Contact"], index=0)
+    page = st.radio("Navigation", ["Home", "Projects", "Contact", "Certifications"], index=0, label_visibility="collapsed")
 
     st.markdown("---")
     st.markdown("##### 🔗 Quick Links")
@@ -280,10 +280,10 @@ if page == "Home":
         <div class="landing-right">
             <div class="deco-ring ring-1"></div>
             <div class="deco-ring ring-2"></div>
-            <div class="float-badge badge-tl">PY</div>
-            <div class="float-badge badge-tr">JS</div>
-            <div class="float-badge badge-bl">NET</div>
-            <div class="float-badge badge-br">IoT</div>
+            <div class="float-badge badge-tl">🐍</div>
+            <div class="float-badge badge-tr">⚛️</div>
+            <div class="float-badge badge-bl">🌐</div>
+            <div class="float-badge badge-br">📡</div>
             {photo_html}
         </div>
     </div>

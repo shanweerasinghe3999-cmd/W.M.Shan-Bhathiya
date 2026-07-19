@@ -19,40 +19,60 @@ st.markdown("""
     html, body, [class*="css"] { font-family: 'Segoe UI', 'Inter', sans-serif; }
 
     /* Headers with accent underline */
-    h1, h2, h3 { font-weight: 700; letter-spacing: -0.3px; }
-    h2, h3 { border-bottom: 2px solid #2E75B6; padding-bottom: 6px; margin-top: 4px; }
+    h1, h2, h3 { font-weight: 800; letter-spacing: -0.3px; }
+    h2, h3 { border-bottom: 3px solid #14B8B8; padding-bottom: 6px; margin-top: 4px; color: #0B5E5E !important; }
+
+    /* Links */
+    a, .stMarkdown a { color: #0E9494 !important; font-weight: 600; }
 
     /* Metric cards */
     div[data-testid="stMetric"] {
-        background: #f5f8fc;
-        border: 1px solid #dbe6f2;
+        background: #EAFBFB;
+        border: 1px solid #B9EDED;
         border-radius: 10px;
         padding: 14px 16px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
-    div[data-testid="stMetricLabel"] { color: #4c6b8a; }
-    div[data-testid="stMetricValue"] { color: #2E75B6; font-weight: 700; }
+    div[data-testid="stMetricLabel"] { color: #0B5E5E; font-weight: 600; }
+    div[data-testid="stMetricValue"] { color: #0E9494; font-weight: 800; }
 
     /* Containers / cards used for projects & certifications */
     div[data-testid="stVerticalBlockBorderWrapper"] {
-        border-radius: 10px !important;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        border-radius: 12px !important;
+        border-color: #B9EDED !important;
+        box-shadow: 0 2px 6px rgba(20,184,184,0.10);
     }
 
     /* Sidebar polish */
-    section[data-testid="stSidebar"] { border-right: 1px solid #dbe6f2; }
+    section[data-testid="stSidebar"] {
+        border-right: 1px solid #B9EDED;
+        background: #F4FDFD;
+    }
+    section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2 { color: #0B5E5E !important; }
 
-    /* Buttons */
-    button[kind="secondaryFormSubmit"], .stButton>button {
-        background-color: #2E75B6; color: white; border-radius: 8px; border: none;
+    /* Circular sidebar profile photo */
+    section[data-testid="stSidebar"] img {
+        border-radius: 50% !important;
+        border: 4px solid #14B8B8;
+        box-shadow: 0 4px 12px rgba(20,184,184,0.25);
+        object-fit: cover;
     }
 
+    /* Buttons */
+    button[kind="secondaryFormSubmit"], .stButton>button, .stDownloadButton>button, .stLinkButton>a {
+        background-color: #14B8B8 !important; color: white !important;
+        border-radius: 8px !important; border: none !important; font-weight: 700 !important;
+    }
+
+    /* Progress bars */
+    div[data-testid="stProgress"] > div > div { background-color: #14B8B8 !important; }
+
     /* Divider spacing */
-    hr { margin: 18px 0; border-color: #dbe6f2; }
+    hr { margin: 18px 0; border-color: #B9EDED; }
 
     /* Hero gradient banner */
     .hero-banner {
-        background: linear-gradient(135deg, #16327a 0%, #2E75B6 55%, #5EA6E6 100%);
+        background: linear-gradient(135deg, #0B5E5E 0%, #14B8B8 55%, #5EE6D0 100%);
         border-radius: 18px;
         padding: 46px 44px 60px 44px;
         position: relative;
@@ -62,11 +82,11 @@ st.markdown("""
     }
     .hero-banner h1 {
         font-size: 36px; margin: 0 0 8px 0; color: #ffffff !important;
-        border-bottom: none; padding-bottom: 0; line-height: 1.15;
+        border-bottom: none; padding-bottom: 0; line-height: 1.15; font-weight: 800;
     }
     .hero-banner p {
-        font-size: 16px; opacity: 0.92; margin: 0; text-align: left;
-        max-width: 560px;
+        font-size: 16px; opacity: 0.95; margin: 0; text-align: left;
+        max-width: 560px; font-weight: 500;
     }
     .hero-photo {
         position: absolute; bottom: -36px; right: 48px;
@@ -79,10 +99,10 @@ st.markdown("""
     }
     .stat-icon-item { text-align: center; min-width: 70px; }
     .stat-icon-item .icon { font-size: 26px; }
-    .stat-icon-item .label { font-size: 12px; color: #4c6b8a; margin-top: 4px; }
+    .stat-icon-item .label { font-size: 12px; color: #0B5E5E; font-weight: 700; margin-top: 4px; }
     .big-stat-row { display: flex; gap: 50px; margin: 4px 0 30px 4px; flex-wrap: wrap; }
-    .big-stat-item .num { font-size: 32px; font-weight: 800; color: #16327a; line-height: 1; }
-    .big-stat-item .label { font-size: 13px; color: #4c6b8a; margin-top: 4px; }
+    .big-stat-item .num { font-size: 34px; font-weight: 800; color: #0E9494; line-height: 1; }
+    .big-stat-item .label { font-size: 13px; color: #0B5E5E; font-weight: 700; margin-top: 4px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -101,7 +121,7 @@ with st.sidebar:
     # Put your photo file in the same folder as this app.py and change the filename below
     img_path = Path(__file__).parent / "profile.jpg"
     if img_path.exists():
-        st.image(str(img_path), width=150, caption="Bachelor of Applied IT")
+        st.image(str(img_path), width=130, caption="Bachelor of Applied IT")
     else:
         st.info("Add your photo as 'profile.jpg' in the same folder as app.py")
 
@@ -110,10 +130,10 @@ with st.sidebar:
         unsafe_allow_html=True
     )
     st.caption("Versatile Tech Builder — Web · Networking · Security · Hardware")
+    st.write("📘 **Degree:** Bachelor of Applied IT")
 
     st.markdown("---")
     st.write("🎓 **University:** SLTC Research University, Padukka")
-    st.write("📘 **Degree:** Bachelor of Applied IT")
     st.write("📞 **Phone:** 0789728257")
     st.write("📍 **Address:** [194/5 B, Samanala Place, Paligedara, Pilliyandala](https://www.google.com/maps/search/?api=1&query=194%2F5+B%2C+Samanala+Place%2C+Paligedara%2C+Pilliyandala) 🗺️")
 

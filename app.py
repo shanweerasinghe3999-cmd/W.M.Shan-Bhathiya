@@ -131,10 +131,10 @@ st.markdown("""
     }
     .skill-pct { color: #2E75B6; font-weight: 700; font-size: 13px; }
     .skill-bar-bg {
-        background: #E4EEF9; border-radius: 8px; height: 7px; overflow: hidden;
+        background: #C8DCF0; border: 1px solid #AFC9E8; border-radius: 8px; height: 9px; overflow: hidden;
     }
     .skill-bar-fill {
-        background: linear-gradient(90deg, #2E75B6, #7FB3E8);
+        background: linear-gradient(90deg, #1B4A7A, #2E75B6);
         height: 100%; border-radius: 8px;
     }
 
@@ -182,15 +182,17 @@ st.markdown("""
     .ring-2 { width: 320px; height: 320px; transform: translate(-50%, -50%) rotate(20deg); }
     .float-badge {
         position: absolute; z-index: 3;
-        background: #12233D; color: #ffffff; font-weight: 800; font-size: 20px;
-        width: 44px; height: 44px; border-radius: 12px;
+        background: #ffffff; border-radius: 50%;
+        width: 50px; height: 50px;
         display: flex; align-items: center; justify-content: center;
         box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+        border: 1px solid #E4EEF9;
     }
-    .badge-tl { top: 4%; left: 8%; background: #E0A800; }
-    .badge-tr { top: 8%; right: 6%; background: #2E75B6; }
-    .badge-bl { bottom: 12%; left: 4%; background: #1B4A7A; }
-    .badge-br { bottom: 6%; right: 10%; background: #2FAE7A; }
+    .float-badge img { width: 26px; height: 26px; object-fit: contain; }
+    .badge-tl { top: 4%; left: 8%; }
+    .badge-tr { top: 8%; right: 6%; }
+    .badge-bl { bottom: 12%; left: 4%; }
+    .badge-br { bottom: 6%; right: 10%; }
 
     /* Responsive: smaller screens */
     @media (max-width: 900px) {
@@ -280,10 +282,10 @@ if page == "Home":
         <div class="landing-right">
             <div class="deco-ring ring-1"></div>
             <div class="deco-ring ring-2"></div>
-            <div class="float-badge badge-tl">🐍</div>
-            <div class="float-badge badge-tr">⚛️</div>
-            <div class="float-badge badge-bl">🌐</div>
-            <div class="float-badge badge-br">📡</div>
+            <div class="float-badge badge-tl"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"></div>
+            <div class="float-badge badge-tr"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></div>
+            <div class="float-badge badge-bl"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular"></div>
+            <div class="float-badge badge-br"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"></div>
             {photo_html}
         </div>
     </div>
@@ -351,19 +353,26 @@ if page == "Home":
     with col3:
         st.subheader("Skills")
         skills = {
-            "Angular": 0.75,
-            "JavaScript": 0.80,
-            "TypeScript": 0.75,
-            "Python": 0.80,
-            "Java": 0.75,
-            "HTML / CSS": 0.80,
-            "Firebase": 0.75,
-            "SQL": 0.75,
-            "Git": 0.80,
+            "Angular": 76,
+            "JavaScript": 82,
+            "TypeScript": 75,
+            "Python": 84,
+            "Java": 75,
+            "HTML / CSS": 80,
+            "Firebase": 77,
+            "SQL": 78,
+            "Git": 81,
         }
+        skill_html = '<div class="skill-list">'
         for name, val in skills.items():
-            st.write(name)
-            st.progress(val)
+            skill_html += f"""
+            <div class="skill-item">
+                <div class="skill-row"><span>{name}</span><span class="skill-pct">{val}%</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:{val}%;"></div></div>
+            </div>
+            """
+        skill_html += "</div>"
+        st.markdown(skill_html, unsafe_allow_html=True)
 
     st.markdown("---")
     st.subheader("📬 Contact")
@@ -388,7 +397,7 @@ elif page == "Projects":
         st.write("• Rule-based AI engine for anomaly & usage insights")
         st.write("• Deployed dashboard on Netlify")
         st.write("**Tech:** ESP32, Firebase, React, Netlify, IoT")
-        st.link_button("🔗 View Live Project (Demo Version)", "https://thunderous-pastelito-6b0907.netlify.app/")
+        st.link_button("🔗 View Live Project (Demo Version)", "https://thunderous-pastelito-6b0907.netlify.app/login")
         st.caption("Note: this is a demo version of the project.")
 
 # -------------------- CERTIFICATIONS PAGE --------------------

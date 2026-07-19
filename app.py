@@ -238,7 +238,7 @@ with st.sidebar:
     st.markdown("---")
 
     # Page navigation
-    page = st.radio("Navigation", ["Home", "Projects", "Contact", "Certifications"], index=0, label_visibility="collapsed")
+    page = st.radio("Navigation", ["Home", "Experience", "Projects", "Contact", "Certifications"], index=0, label_visibility="collapsed")
 
     st.markdown("---")
     st.markdown("##### 🔗 Quick Links")
@@ -311,11 +311,13 @@ if page == "Home":
         st.markdown('<h3 style="white-space: nowrap; font-size: 19px;">📈 Experience Overview</h3>', unsafe_allow_html=True)
         data = {
             "Year": ["2023", "2024", "2025", "2026"],
-            "Projects": [1, 2, 3, 4],
+            "Achievements": [0, 0, 3, 1],
         }
-        fig = px.line(data, x="Year", y="Projects", markers=True, title="Projects Completed per Year")
+        fig = px.bar(data, x="Year", y="Achievements", title="Certifications & Major Projects by Year",
+                     color_discrete_sequence=["#2E75B6"])
         fig.update_layout(height=280, margin=dict(l=10, r=10, t=30, b=10))
         st.plotly_chart(fig, use_container_width=True)
+        st.caption("2025: 3 certifications completed · 2026: final-year IoT project completed")
 
     # --- Column 2: Main Content ---
     with col2:
@@ -364,6 +366,7 @@ if page == "Home":
             "Git": 81,
             "Power BI": 75,
             "Tableau": 72,
+            "UI/UX Design": 70,
         }
         skill_html = '<div class="skill-list">'
         for name, val in skills.items():
@@ -377,6 +380,16 @@ if page == "Home":
         st.markdown(skill_html, unsafe_allow_html=True)
 
     st.markdown("---")
+    st.subheader("📬 Contact")
+    st.write("📧 shanweerasinghe3999@gmail.com")
+    st.write("📞 0789728257")
+    st.write("🌐 [LinkedIn](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
+    st.write("💻 [GitHub](https://github.com/shanweerasinghe3999-cmd)")
+
+# -------------------- EXPERIENCE PAGE --------------------
+elif page == "Experience":
+    st.title("🧳 Experience & Education")
+
     col_exp, col_edu = st.columns(2)
 
     with col_exp:
@@ -419,13 +432,6 @@ if page == "Home":
         with st.container(border=True):
             st.write("Basic Computer Course — Zonal ICT Education Center, Sri Jayawardhanapura Zone")
             st.write("Computer Literacy Course — Open University of Sri Lanka")
-
-    st.markdown("---")
-    st.subheader("📬 Contact")
-    st.write("📧 shanweerasinghe3999@gmail.com")
-    st.write("📞 0789728257")
-    st.write("🌐 [LinkedIn](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
-    st.write("💻 [GitHub](https://github.com/shanweerasinghe3999-cmd)")
 
 # -------------------- PROJECTS PAGE --------------------
 elif page == "Projects":

@@ -268,38 +268,23 @@ if page == "Home":
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "Git"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "Firebase"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "Figma"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/powerbi.svg", "Power BI"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/tableau.svg", "Tableau"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/microsoftword.svg", "Word"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/microsoftexcel.svg", "Excel"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/microsoftpowerpoint.svg", "PowerPoint"),
     ]
-    # Text-badge fallback for tools without a reliable free icon CDN
-    _text_badges = [
-        ("PBI", "#F2C811", "#3a2f00", "Power BI"),
-        ("TAB", "#E97627", "#ffffff", "Tableau"),
-        ("W", "#2B579A", "#ffffff", "Word"),
-        ("X", "#217346", "#ffffff", "Excel"),
-        ("P", "#B7472A", "#ffffff", "PowerPoint"),
-    ]
-    _n = len(_skill_badges) + len(_text_badges)
+    _n = len(_skill_badges)
     _radius_px = 175  # pixels from center - clear of the ring
     badge_html = ""
-    _i = 0
-    for _url, _alt in _skill_badges:
-        _angle = (2 * math.pi * _i / _n) - (math.pi / 2)
-        _x = _radius_px * math.cos(_angle)
-        _y = _radius_px * math.sin(_angle)
-        badge_html += (
-            f'<div class="float-badge" style="left:calc(50% + {_x:.0f}px); top:calc(50% + {_y:.0f}px); '
-            f'transform: translate(-50%,-50%);"><img src="{_url}" alt="{_alt}"></div>'
-        )
-        _i += 1
-    for _label, _bg, _fg, _alt in _text_badges:
+    for _i, (_url, _alt) in enumerate(_skill_badges):
         _angle = (2 * math.pi * _i / _n) - (math.pi / 2)
         _x = _radius_px * math.cos(_angle)
         _y = _radius_px * math.sin(_angle)
         badge_html += (
             f'<div class="float-badge" title="{_alt}" style="left:calc(50% + {_x:.0f}px); top:calc(50% + {_y:.0f}px); '
-            f'transform: translate(-50%,-50%); background:{_bg}; color:{_fg}; '
-            f'font-weight:800; font-size:11px;">{_label}</div>'
+            f'transform: translate(-50%,-50%);"><img src="{_url}" alt="{_alt}"></div>'
         )
-        _i += 1
 
     st.markdown(f"""
     <div class="landing-hero">

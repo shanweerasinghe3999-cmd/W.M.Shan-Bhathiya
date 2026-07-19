@@ -88,6 +88,13 @@ st.markdown("""
         font-size: 16px; opacity: 0.95; margin: 0; text-align: left;
         max-width: 560px; font-weight: 500;
     }
+    .hero-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .hero-tag {
+        background: rgba(255,255,255,0.16);
+        border: 1px solid rgba(255,255,255,0.35);
+        color: #ffffff; font-size: 12.5px; font-weight: 600;
+        padding: 5px 14px; border-radius: 20px;
+    }
     .hero-photo {
         position: absolute; bottom: -36px; right: 48px;
         width: 96px; height: 96px; border-radius: 10px;
@@ -168,6 +175,12 @@ if page == "Home":
     <div class="hero-banner">
         <h1>W.M. Shan Bhathiya<br>Nawarathna Weerasinghe</h1>
         <p>Versatile Tech Builder — Web · Networking · Security · Hardware</p>
+        <div class="hero-tags">
+            <span class="hero-tag">Web Dev</span>
+            <span class="hero-tag">Networking</span>
+            <span class="hero-tag">Security</span>
+            <span class="hero-tag">Hardware / IoT</span>
+        </div>
         {photo_html}
     </div>
     """, unsafe_allow_html=True)
@@ -176,12 +189,6 @@ if page == "Home":
     <div class="big-stat-row">
         <div class="big-stat-item"><div class="num">1</div><div class="label">Major Project</div></div>
         <div class="big-stat-item"><div class="num">3</div><div class="label">Certifications</div></div>
-    </div>
-    <div class="stat-icon-row">
-        <div class="stat-icon-item"><div class="icon">🌐</div><div class="label">Web Dev</div></div>
-        <div class="stat-icon-item"><div class="icon">📡</div><div class="label">Networking</div></div>
-        <div class="stat-icon-item"><div class="icon">🔒</div><div class="label">Security</div></div>
-        <div class="stat-icon-item"><div class="icon">🔧</div><div class="label">Hardware / IoT</div></div>
     </div>
     """, unsafe_allow_html=True)
 

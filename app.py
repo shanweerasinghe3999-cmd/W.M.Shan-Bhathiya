@@ -291,7 +291,7 @@ if page == "Home":
         <div class="landing-left">
             <div class="landing-hello">Hello</div>
             <h1 class="landing-title">I'm <span class="landing-accent">Shan Bhathiya</span></h1>
-            <div class="landing-role">Versatile <span class="landing-accent">Tech Builder</span></div>
+            <div class="landing-role"><span class="landing-accent">Web Developer</span></div>
             <p class="landing-desc">
                 Final-year Bachelor of Applied IT undergraduate, comfortable across
                 web development, networking, cyber security, and embedded hardware.
@@ -396,7 +396,7 @@ if page == "Home":
         for name, val in skills.items():
             skill_html += (
                 f'<div class="skill-item">'
-                f'<div class="skill-row"><span>{name}</span><span class="skill-pct">{val}%</span></div>'
+                f'<div class="skill-row"><span>{name}</span></div>'
                 f'<div class="skill-bar-bg"><div class="skill-bar-fill" style="width:{val}%;"></div></div>'
                 f'</div>'
             )

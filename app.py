@@ -215,26 +215,23 @@ _profile_b64 = _img_b64(Path(__file__).parent / "profile.jpg")
 
 # -------------------- SIDEBAR --------------------
 with st.sidebar:
-    st.markdown("## 🧑🏾‍💻 My Profile")
+    col_pic, col_info = st.columns([1, 2])
+    with col_pic:
+        img_path = Path(__file__).parent / "profile.jpg"
+        if img_path.exists():
+            st.image(str(img_path), width=80)
+        else:
+            st.caption("Add profile.jpg")
+    with col_info:
+        st.markdown(
+            "<div style='font-weight:800; font-size:16px; line-height:1.2; color:#1B4A7A;'>Shan Bhathiya Nawarathna</div>",
+            unsafe_allow_html=True
+        )
+        st.caption("Bachelor of Applied IT")
 
-    # Put your photo file in the same folder as this app.py and change the filename below
-    img_path = Path(__file__).parent / "profile.jpg"
-    if img_path.exists():
-        st.image(str(img_path), width=150, caption="Bachelor of Applied IT")
-    else:
-        st.info("Add your photo as 'profile.jpg' in the same folder as app.py")
-
-    st.markdown(
-        "<h1 style='white-space: nowrap; text-align: justify;'>Shan Bhathiya Nawarathna</h1>",
-        unsafe_allow_html=True
-    )
-    st.caption("Versatile Tech Builder — Web · Networking · Security · Hardware")
-    st.write("📘 **Degree:** Bachelor of Applied IT")
-
-    st.markdown("---")
-    st.write("🎓 **University:** SLTC Research University, Padukka")
-    st.write("📞 **Phone:** 0789728257")
-    st.write("📍 **Address:** [194/5 B, Samanala Place, Paligedara, Pilliyandala](https://www.google.com/maps/search/?api=1&query=194%2F5+B%2C+Samanala+Place%2C+Paligedara%2C+Pilliyandala) 🗺️")
+    st.write("🎓 SLTC Research University, Padukka")
+    st.write("📞 0789728257")
+    st.write("📍 [194/5 B, Samanala Place, Paligedara, Pilliyandala](https://www.google.com/maps/search/?api=1&query=194%2F5+B%2C+Samanala+Place%2C+Paligedara%2C+Pilliyandala) 🗺️")
 
     st.markdown("---")
 
@@ -242,12 +239,10 @@ with st.sidebar:
     page = st.radio("📂 Navigation", ["Home", "Projects", "Certifications", "Contact"], index=0)
 
     st.markdown("---")
-    st.markdown("### 🔗 Quick Links")
-    st.write("• [LinkedIn](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
-    st.write("• [GitHub](https://github.com/shanweerasinghe3999-cmd)")
-    st.write("• 📧 Email: shanweerasinghe3999@gmail.com")
+    st.markdown("##### 🔗 Quick Links")
+    st.write("[LinkedIn](https://www.linkedin.com/in/shan-bhathiya-1999283ab) · [GitHub](https://github.com/shanweerasinghe3999-cmd)")
+    st.write("📧 shanweerasinghe3999@gmail.com")
 
-    st.markdown("---")
     cv_path = Path(__file__).parent / "Shan_CV.pdf"
     if cv_path.exists():
         with open(cv_path, "rb") as f:
@@ -317,31 +312,54 @@ if page == "Home":
             "Projects": [1, 2, 3, 4],
         }
         fig = px.line(data, x="Year", y="Projects", markers=True, title="Projects Completed per Year")
-        fig.update_layout(height=220, margin=dict(l=10, r=10, t=30, b=10))
+        fig.update_layout(height=280, margin=dict(l=10, r=10, t=30, b=10))
         st.plotly_chart(fig, use_container_width=True)
 
     # --- Column 2: Main Content ---
     with col2:
-        st.header("👋 About Me")
+        st.subheader("👋 About Me")
         st.write(
-            "Final-year Bachelor of Applied IT undergraduate at SLTC Research University, Padukka. "
-            "Rather than staying in one lane, I've built real, working projects across web development, "
-            "programming, networking, cyber security, and embedded hardware — and I enjoy the range more "
-            "than specializing narrowly. As Group Leader of a four-person final-year team, I led the "
-            "design and delivery of a cloud-based IoT energy management system from sensor to dashboard, "
-            "then defended it at VIVA."
+            "Hello! I'm Shan Weerasinghe, an Applied Information Technology undergraduate at SLTC "
+            "Research University with a passion for building innovative and user-friendly software "
+            "solutions."
+        )
+        st.write(
+            "I have a strong interest in web development, software engineering, Internet of Things "
+            "(IoT), data analytics, and artificial intelligence. I enjoy learning new technologies and "
+            "applying them to real-world projects that create meaningful impact."
+        )
+        st.write(
+            "My technical skills include Angular, JavaScript, TypeScript, Python, Java, HTML, CSS, "
+            "Firebase, SQL, and Git. Through academic and personal projects, I have gained experience "
+            "in developing responsive web applications, IoT-based systems, and data-driven solutions "
+            "while strengthening my problem-solving and teamwork skills."
+        )
+        st.write(
+            "I am a motivated, detail-oriented, and lifelong learner who is always looking for "
+            "opportunities to grow professionally and contribute to innovative technology projects."
+        )
+        st.write(
+            "When I'm not coding, I enjoy exploring new technologies, improving my development skills, "
+            "and working on projects that challenge me to think creatively."
+        )
+        st.write(
+            "I'm excited to begin my career as a Software Engineer and collaborate with teams that "
+            "build impactful digital solutions."
         )
 
     # --- Column 3: Skills ---
     with col3:
         st.subheader("Skills")
         skills = {
-            "Python": 0.75,
-            "React / Web Dev": 0.65,
-            "Networking": 0.60,
-            "Cyber Security": 0.55,
-            "IoT / Embedded": 0.65,
-            "Cloud (Firebase/AWS)": 0.50,
+            "Angular": 0.75,
+            "JavaScript": 0.80,
+            "TypeScript": 0.75,
+            "Python": 0.80,
+            "Java": 0.75,
+            "HTML / CSS": 0.80,
+            "Firebase": 0.75,
+            "SQL": 0.75,
+            "Git": 0.80,
         }
         for name, val in skills.items():
             st.write(name)

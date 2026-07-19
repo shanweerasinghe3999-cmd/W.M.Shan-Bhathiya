@@ -326,7 +326,7 @@ if page == "Home":
         st.write(
             "Final-year Bachelor of Applied IT undergraduate at SLTC Research University, Padukka. "
             "Rather than staying in one lane, I've built real, working projects across web development, "
-            "programming, networking, cyber security, and embedded hardware — and I enjoy the range more "
+            "programming, networking, cyber security, and embedded hardware and I enjoy the range more "
             "than specializing narrowly. As Group Leader of a four-person final-year team, I led the "
             "design and delivery of a cloud-based IoT energy management system from sensor to dashboard, "
             "then defended it at VIVA."

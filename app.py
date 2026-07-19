@@ -122,14 +122,85 @@ st.markdown("""
     .big-stat-item .num { font-size: 34px; font-weight: 800; color: #2E75B6; line-height: 1; }
     .big-stat-item .label { font-size: 13px; color: #1B4A7A; font-weight: 700; margin-top: 4px; }
 
+    /* Custom skill bars (replacing default st.progress look) */
+    .skill-list { margin-top: 4px; }
+    .skill-item { margin-bottom: 16px; }
+    .skill-row {
+        display: flex; justify-content: space-between; align-items: baseline;
+        font-size: 14px; font-weight: 600; color: #1B4A7A; margin-bottom: 6px;
+    }
+    .skill-pct { color: #2E75B6; font-weight: 700; font-size: 13px; }
+    .skill-bar-bg {
+        background: #E4EEF9; border-radius: 8px; height: 7px; overflow: hidden;
+    }
+    .skill-bar-fill {
+        background: linear-gradient(90deg, #2E75B6, #7FB3E8);
+        height: 100%; border-radius: 8px;
+    }
+
+    /* ---------- Landing-page style hero ---------- */
+    .landing-hero {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 30px; padding: 30px 10px 60px 10px; flex-wrap: wrap;
+    }
+    .landing-left { flex: 1 1 380px; min-width: 280px; }
+    .landing-hello { color: #2E75B6; font-weight: 700; font-size: 16px; margin-bottom: 6px; }
+    .landing-title { font-size: 40px; font-weight: 800; color: #12233D; margin: 0 0 4px 0; border-bottom: none !important; }
+    .landing-role { font-size: 22px; font-weight: 600; color: #12233D; margin-bottom: 16px; }
+    .landing-accent { color: #2E75B6; }
+    .landing-desc { color: #4c6b8a; font-size: 15px; max-width: 460px; margin-bottom: 22px; }
+    .landing-cta-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .landing-cta-btn {
+        background: #12233D; color: #ffffff !important; padding: 12px 26px;
+        border-radius: 30px; font-weight: 700; font-size: 14px; text-decoration: none !important;
+    }
+    .landing-social a {
+        margin-right: 16px; color: #12233D !important; font-weight: 600; font-size: 13px;
+        text-decoration: none !important; border-bottom: 1px solid transparent;
+    }
+    .landing-social a:hover { border-bottom: 1px solid #2E75B6; }
+
+    .landing-right {
+        flex: 1 1 300px; min-width: 260px; height: 320px;
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+    }
+    .landing-photo {
+        width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
+        border: 6px solid #ffffff; box-shadow: 0 10px 30px rgba(46,117,182,0.25);
+        position: relative; z-index: 2;
+    }
+    .landing-photo-placeholder {
+        display: flex; align-items: center; justify-content: center;
+        font-size: 60px; background: #EEF5FC;
+    }
+    .deco-ring {
+        position: absolute; border: 1.5px dashed #9FC4EA; border-radius: 50%;
+        top: 50%; left: 50%; z-index: 1;
+    }
+    .ring-1 { width: 270px; height: 270px; transform: translate(-50%, -50%); }
+    .ring-2 { width: 320px; height: 320px; transform: translate(-50%, -50%) rotate(20deg); }
+    .float-badge {
+        position: absolute; z-index: 3;
+        background: #12233D; color: #ffffff; font-weight: 800; font-size: 12px;
+        width: 44px; height: 44px; border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+    .badge-tl { top: 4%; left: 8%; background: #E0A800; }
+    .badge-tr { top: 8%; right: 6%; background: #2E75B6; }
+    .badge-bl { bottom: 12%; left: 4%; background: #1B4A7A; }
+    .badge-br { bottom: 6%; right: 10%; background: #2FAE7A; }
+
     /* Responsive: smaller screens */
     @media (max-width: 900px) {
-        .hero-banner { padding: 30px 24px 70px 24px; }
-        .hero-banner h1 { font-size: 26px; }
-        .hero-banner p { font-size: 14px; max-width: 100%; }
-        .hero-photo { width: 72px; height: 72px; bottom: -28px; right: 24px; }
-        .big-stat-row { gap: 30px; }
-        .big-stat-item .num { font-size: 26px; }
+        .landing-hero { flex-direction: column; text-align: center; }
+        .landing-desc { max-width: 100%; }
+        .landing-cta-row { justify-content: center; }
+        .landing-right { height: 260px; }
+        .landing-photo { width: 170px; height: 170px; }
+        .ring-1 { width: 210px; height: 210px; }
+        .ring-2 { width: 250px; height: 250px; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -191,18 +262,35 @@ with st.sidebar:
 
 # -------------------- HOME PAGE --------------------
 if page == "Home":
-    photo_html = f'<img src="data:image/jpeg;base64,{_profile_b64}" class="hero-photo">' if _profile_b64 else ""
+    photo_html = f'<img src="data:image/jpeg;base64,{_profile_b64}" class="landing-photo">' if _profile_b64 else '<div class="landing-photo landing-photo-placeholder">📷</div>'
     st.markdown(f"""
-    <div class="hero-banner">
-        <h1>W.M. Shan Bhathiya<br>Nawarathna Weerasinghe</h1>
-        <p>Versatile Tech Builder — Web · Networking · Security · Hardware</p>
-        <div class="hero-tags">
-            <span class="hero-tag">Web Dev</span>
-            <span class="hero-tag">Networking</span>
-            <span class="hero-tag">Security</span>
-            <span class="hero-tag">Hardware / IoT</span>
+    <div class="landing-hero">
+        <div class="landing-left">
+            <div class="landing-hello">Hello</div>
+            <h1 class="landing-title">I'm <span class="landing-accent">Shan Bhathiya</span></h1>
+            <div class="landing-role">Versatile <span class="landing-accent">Tech Builder</span></div>
+            <p class="landing-desc">
+                Final-year Bachelor of Applied IT undergraduate, comfortable across
+                web development, networking, cyber security, and embedded hardware.
+            </p>
+            <div class="landing-cta-row">
+                <a href="#about-me" class="landing-cta-btn">About Me</a>
+                <span class="landing-social">
+                    <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/shanweerasinghe3999-cmd" target="_blank">GitHub</a>
+                    <a href="mailto:shanweerasinghe3999@gmail.com">Email</a>
+                </span>
+            </div>
         </div>
-        {photo_html}
+        <div class="landing-right">
+            <div class="deco-ring ring-1"></div>
+            <div class="deco-ring ring-2"></div>
+            <div class="float-badge badge-tl">PY</div>
+            <div class="float-badge badge-tr">JS</div>
+            <div class="float-badge badge-bl">NET</div>
+            <div class="float-badge badge-br">IoT</div>
+            {photo_html}
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -248,16 +336,23 @@ if page == "Home":
     with col3:
         st.subheader("Skills")
         skills = {
-            "Python": 0.75,
-            "React / Web Dev": 0.65,
-            "Networking": 0.60,
-            "Cyber Security": 0.55,
-            "IoT / Embedded": 0.65,
-            "Cloud (Firebase/AWS)": 0.50,
+            "Python": 75,
+            "React / Web Dev": 65,
+            "Networking": 60,
+            "Cyber Security": 55,
+            "IoT / Embedded": 65,
+            "Cloud (Firebase/AWS)": 50,
         }
+        skill_html = '<div class="skill-list">'
         for name, val in skills.items():
-            st.write(name)
-            st.progress(val)
+            skill_html += f"""
+            <div class="skill-item">
+                <div class="skill-row"><span>{name}</span><span class="skill-pct">{val}%</span></div>
+                <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:{val}%;"></div></div>
+            </div>
+            """
+        skill_html += "</div>"
+        st.markdown(skill_html, unsafe_allow_html=True)
 
     st.markdown("---")
     st.subheader("📬 Contact")

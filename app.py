@@ -5,10 +5,17 @@ import plotly.express as px
 
 # -------------------- PAGE SETUP --------------------
 st.set_page_config(
-    page_title="Shan Bhathiya Weerasinghe — Portfolio",
+    page_title="Shan Bhathiya Nawarathna — Portfolio",
     page_icon="🧑🏾‍💻",
     layout="wide"
 )
+
+# Justify all text across the app
+st.markdown("""
+<style>
+    p, li, div, span, .stMarkdown, .stCaption { text-align: justify; }
+</style>
+""", unsafe_allow_html=True)
 
 # -------------------- SIDEBAR --------------------
 with st.sidebar:
@@ -21,14 +28,17 @@ with st.sidebar:
     else:
         st.info("Add your photo as 'profile.jpg' in the same folder as app.py")
 
-    st.title("Shan Bhathiya Weerasinghe")
+    st.markdown(
+        "<h1 style='white-space: nowrap; text-align: justify;'>Shan Bhathiya Nawarathna</h1>",
+        unsafe_allow_html=True
+    )
     st.caption("Versatile Tech Builder — Web · Networking · Security · Hardware")
 
     st.markdown("---")
     st.write("🎓 **University:** SLTC Research University, Padukka")
     st.write("📘 **Degree:** Bachelor of Applied IT")
     st.write("📞 **Phone:** 0789728257")
-    st.write("📍 **Address:** 194/5 B, Samanala Place, Paligedara, Pilliyandala")
+    st.write("📍 **Address:** [194/5 B, Samanala Place, Paligedara, Pilliyandala](https://www.google.com/maps/search/?api=1&query=194%2F5+B%2C+Samanala+Place%2C+Paligedara%2C+Pilliyandala) 🗺️")
 
     st.markdown("---")
 
@@ -48,12 +58,11 @@ if page == "Home":
     # --- Column 1: Quick stats ---
     with col1:
         st.subheader("📊 Quick Stats")
-        st.metric("Major Projects", "4+")
-        st.metric("VIVA Score", "81.5/100")
+        st.metric("Major Projects", "1")
         st.metric("Certifications", "3")
+        st.metric("Role", "Group Leader")
         st.markdown("---")
         st.subheader("Highlights")
-        st.write("• Led a 4-person team as Group Leader")
         st.write("• Built full IoT-to-cloud energy system")
         st.write("• Certified in Python & Web Design")
         st.write("• Hands-on with hardware & software both")
@@ -69,17 +78,6 @@ if page == "Home":
             "design and delivery of a cloud-based IoT energy management system from sensor to dashboard, "
             "then defended it at VIVA."
         )
-
-        st.markdown("---")
-        st.subheader("🕓 Timeline")
-        timeline = [
-            ("2026-05", "IoT project kickoff: Firebase, React dashboard, ESP32 firmware for Week 14 PoC"),
-            ("2026-06", "Exam & project sprint: Cloud Computing, Enterprise Software Dev, UX/UI, Mobile Dev"),
-            ("2026-07", "Final academic report, presentation deck, system polish ahead of VIVA"),
-            ("2026-07-11", "VIVA defended as Group Leader — Cloud-Based AI Energy Management System"),
-        ]
-        for year, event in timeline:
-            st.write(f"**{year}** — {event}")
 
         st.markdown("---")
         st.subheader("📈 Experience Overview")
@@ -131,24 +129,6 @@ elif page == "Projects":
         st.write("Tech: ESP32, Firebase, React, Netlify, IoT")
         st.markdown("---")
 
-    with st.container():
-        st.subheader("Digital Forensics Investigation")
-        st.write(
-            "Network traffic and file-based forensics assignment: captured and analyzed traffic, extracted "
-            "artifacts with NetworkMiner, and recovered hidden data using OpenStego/Steghide."
-        )
-        st.write("Tech: Wireshark, NetworkMiner, Steganography")
-        st.markdown("---")
-
-    with st.container():
-        st.subheader("SONERA — Music Streaming App")
-        st.write(
-            "A music streaming app concept designed in Figma with a dark navy and blue-accent theme, "
-            "including full screen flows and a written design report."
-        )
-        st.write("Tech: Figma, UX/UI")
-        st.markdown("---")
-
 # -------------------- CERTIFICATIONS PAGE --------------------
 elif page == "Certifications":
     st.title("🎓 Certifications")
@@ -179,7 +159,7 @@ elif page == "Contact":
     st.markdown("---")
     st.write("📧 **Email:** shanweerasinghe3999@gmail.com")
     st.write("📞 **Phone:** 0789728257")
-    st.write("📍 **Address:** 194/5 B, Samanala Place, Paligedara, Pilliyandala")
+    st.write("📍 **Address:** [194/5 B, Samanala Place, Paligedara, Pilliyandala](https://www.google.com/maps/search/?api=1&query=194%2F5+B%2C+Samanala+Place%2C+Paligedara%2C+Pilliyandala) 🗺️")
     st.write("🌐 **LinkedIn:** [shan-bhathiya-1999283ab](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
     st.write("💻 **GitHub:** [shanweerasinghe3999-cmd](https://github.com/shanweerasinghe3999-cmd)")
     st.markdown("---")
@@ -198,4 +178,4 @@ elif page == "Contact":
 
 # -------------------- FOOTER --------------------
 st.markdown("---")
-st.caption(f"Built with 🧑🏾‍💻 by Shan Bhathiya Weerasinghe • {datetime.now().year}")
+st.caption(f"Built with 🧑🏾‍💻 by Shan Bhathiya Nawarathna • {datetime.now().year}")

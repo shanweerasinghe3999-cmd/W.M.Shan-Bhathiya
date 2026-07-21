@@ -192,8 +192,8 @@ st.markdown("""
     .float-badge img { width: 20px; height: 20px; object-fit: contain; }
 
     /* Certification card title - fixed height so cards align regardless of title length */
-    .cert-title { min-height: 64px; display: flex; align-items: flex-end; }
-    .cert-title h3 { margin: 0; border-bottom: none !important; }
+    .cert-title { min-height: 76px; display: flex; align-items: flex-end; }
+    .cert-title h3 { margin: 0; border-bottom: none !important; line-height: 1.25; font-size: 18px; }
 
     /* Responsive: smaller screens */
     @media (max-width: 900px) {

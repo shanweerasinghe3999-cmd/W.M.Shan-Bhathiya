@@ -7,7 +7,7 @@ import math
 
 # -------------------- PAGE SETUP --------------------
 st.set_page_config(
-    page_title="Shan Bhathiya Nawarathna — Portfolio",
+    page_title="Shan Bhathiya-Portfolio",
     page_icon="🧑🏾‍💻",
     layout="wide"
 )
@@ -484,6 +484,9 @@ elif page == "Certifications":
     c1, c2, c3 = st.columns(3)
     with c1:
         with st.container(border=True):
+            cert_path = Path(__file__).parent / "cert_python_beginners.jpg"
+            if cert_path.exists():
+                st.image(str(cert_path), use_container_width=True)
             st.subheader("Python for Beginners")
             st.caption("Dept. of Computer Science & Engineering")
             st.write("Issued: Jul 2025")
@@ -491,6 +494,9 @@ elif page == "Certifications":
             st.link_button("🔗 Verify", "https://open.uom.lk/verify")
     with c2:
         with st.container(border=True):
+            cert_path = Path(__file__).parent / "cert_python_programming.jpg"
+            if cert_path.exists():
+                st.image(str(cert_path), use_container_width=True)
             st.subheader("Python Programming")
             st.caption("Dept. of Computer Science & Engineering")
             st.write("Issued: 2025")
@@ -498,6 +504,9 @@ elif page == "Certifications":
             st.link_button("🔗 Verify", "https://open.uom.lk/verify")
     with c3:
         with st.container(border=True):
+            cert_path = Path(__file__).parent / "cert_web_design.jpg"
+            if cert_path.exists():
+                st.image(str(cert_path), use_container_width=True)
             st.subheader("Web Design for Beginners")
             st.caption("Dept. of Information Technology")
             st.write("Issued: 2025")

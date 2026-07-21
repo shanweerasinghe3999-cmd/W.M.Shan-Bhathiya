@@ -424,42 +424,43 @@ elif page == "Experience":
         st.subheader("💼 Work Experience")
         with st.container(border=True):
             st.write("**Union Bank** | Pettah")
-            st.caption("2019 – 2020")
-            st.write("Personal Banking Advisor at the sales & credit card unit.")
+            st.caption("Feb 2019 – Dec 2020")
+            st.write("• Worked with customers to find banking products for them like savings accounts, fixed deposits and credit cards based on what they needed.")
+            st.write("• Made sure a number of credit cards and other banking products were sold every month, consistently hitting targets.")
+            st.write("• Reviewed each customer's information to check credit eligibility and determine appropriate credit limits.")
+            st.write("• Helped customers apply for credit cards, checked their documents, and followed up to ensure approvals were processed on time.")
         with st.container(border=True):
-            st.write("**Reebonn Lanka Pvt Ltd.** | Malabe")
-            st.caption("May 2024 – December 2024")
-            st.write("Data Entry Operator at the Production Department.")
+            st.write("**Reebonn Lanka Pvt Ltd.**")
+            st.caption("May 2024 – Dec 2024")
+            st.write("• Entered production data into the company system daily, ensuring accuracy and on-time reporting.")
+            st.write("• Tracked raw materials, finished goods, and production volumes.")
+            st.write("• Checked data for mistakes and fixed errors to keep records correct.")
+            st.write("• Prepared simple production reports for supervisors and the management team.")
 
         st.markdown("---")
-        st.subheader("🧰 Additional Skills")
+        st.subheader("🧰 Key Skills")
         with st.container(border=True):
-            st.write("• Microsoft Office (Word, Excel, PowerPoint)")
-            st.write("• SAP software experience")
-            st.write("• Data entry with high accuracy")
-            st.write("• Good communication skills")
-            st.write("• Basic IT knowledge")
+            st.write("• Strong troubleshooting skills in hardware, software, and network systems")
+            st.write("• Analytical & Problem-Solving Skills")
+            st.write("• Strong Attention to Detail")
+            st.write("• Customer Relationship Management")
+            st.write("• Sales & Target Achievement")
+            st.write("• Documentation & Reporting")
 
     with col_edu:
         st.subheader("🎓 Education")
         with st.container(border=True):
-            st.write("**Bachelor of Applied IT**")
-            st.caption("SLTC Research University, Padukka · 2023 – Present")
+            st.write("**Bachelor's Degree in Applied Information Technology**")
+            st.caption("SLTC Research University · 2023 – Present")
         with st.container(border=True):
-            st.write("**GCE Advanced Level** (2021)")
-            st.caption("History of Sri Lanka & India: B · Geography: C · Buddhist Civilization: C")
+            st.write("**Diploma in English**")
+            st.caption("British Way English Academy · Dec 2022 – Feb 2023")
         with st.container(border=True):
-            st.write("**GCE Advanced Level** (2019) — Dharmapala College, Pannipitiya")
-            st.caption("Chemistry: S · English: S")
+            st.write("**Basic Computer Course**")
+            st.caption("Zonal Information & Communication Technology Education Center, Sri Jayawardenepura Zone")
         with st.container(border=True):
-            st.write("**GCE Ordinary Level** (2015) — President College, Maharagama")
-            st.caption("7 A's & 2 C's")
-        with st.container(border=True):
-            st.write("**Diploma in English** — British Way English Academy")
-            st.caption("December 2022 – February 2023")
-        with st.container(border=True):
-            st.write("Basic Computer Course — Zonal ICT Education Center, Sri Jayawardhanapura Zone")
-            st.write("Computer Literacy Course — Open University of Sri Lanka")
+            st.write("**Computer Literacy Course**")
+            st.caption("Open University of Sri Lanka")
 
 # -------------------- PROJECTS PAGE --------------------
 elif page == "Projects":

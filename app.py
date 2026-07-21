@@ -7,7 +7,7 @@ import math
 
 # -------------------- PAGE SETUP --------------------
 st.set_page_config(
-    page_title="Shan Bhathiya-Portfolio",
+    page_title="Shan Bhathiya Nawarathna — Portfolio",
     page_icon="🧑🏾‍💻",
     layout="wide"
 )
@@ -190,6 +190,10 @@ st.markdown("""
         border: 1px solid #E4EEF9;
     }
     .float-badge img { width: 20px; height: 20px; object-fit: contain; }
+
+    /* Certification card title - fixed height so cards align regardless of title length */
+    .cert-title { min-height: 64px; display: flex; align-items: flex-end; }
+    .cert-title h3 { margin: 0; border-bottom: none !important; }
 
     /* Responsive: smaller screens */
     @media (max-width: 900px) {
@@ -487,7 +491,7 @@ elif page == "Certifications":
             cert_path = Path(__file__).parent / "cert_python_beginners.jpg"
             if cert_path.exists():
                 st.image(str(cert_path), use_container_width=True)
-            st.subheader("Python for Beginners")
+            st.markdown('<div class="cert-title"><h3>Python for Beginners</h3></div>', unsafe_allow_html=True)
             st.caption("Dept. of Computer Science & Engineering")
             st.write("Issued: Jul 2025")
             st.write("Code: q1TNowBo5z")
@@ -497,7 +501,7 @@ elif page == "Certifications":
             cert_path = Path(__file__).parent / "cert_python_programming.jpg"
             if cert_path.exists():
                 st.image(str(cert_path), use_container_width=True)
-            st.subheader("Python Programming")
+            st.markdown('<div class="cert-title"><h3>Python Programming</h3></div>', unsafe_allow_html=True)
             st.caption("Dept. of Computer Science & Engineering")
             st.write("Issued: 2025")
             st.write("Code: A7XtQFrrIF")
@@ -507,7 +511,7 @@ elif page == "Certifications":
             cert_path = Path(__file__).parent / "cert_web_design.jpg"
             if cert_path.exists():
                 st.image(str(cert_path), use_container_width=True)
-            st.subheader("Web Design for Beginners")
+            st.markdown('<div class="cert-title"><h3>Web Design for Beginners</h3></div>', unsafe_allow_html=True)
             st.caption("Dept. of Information Technology")
             st.write("Issued: 2025")
             st.write("Code: v6RIWfKclG")

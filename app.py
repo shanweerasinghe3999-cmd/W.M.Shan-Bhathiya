@@ -12,6 +12,10 @@ st.set_page_config(
     layout="wide"
 )
 
+with st.sidebar:
+    dark_mode = st.toggle("🌙 Dark Mode", value=st.session_state.get("dark_mode", False))
+    st.session_state["dark_mode"] = dark_mode
+
 # Professional styling layer
 st.markdown("""
 <style>
@@ -208,6 +212,52 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+if dark_mode:
+    st.markdown("""
+    <style>
+        .stApp { background-color: #0F1C2E !important; color: #EAF2FB !important; }
+        section[data-testid="stSidebar"] { background: #16283F !important; border-right: 1px solid #263B54 !important; }
+        section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2,
+        section[data-testid="stSidebar"] h3, section[data-testid="stSidebar"] p,
+        section[data-testid="stSidebar"] li, section[data-testid="stSidebar"] span,
+        section[data-testid="stSidebar"] div, section[data-testid="stSidebar"] label {
+            color: #EAF2FB !important;
+        }
+        h1, h2, h3, p, li, span, div, label { color: #EAF2FB; }
+        h2, h3 { border-bottom: 3px solid #4A90D9 !important; color: #EAF2FB !important; }
+        a, .stMarkdown a { color: #7FB3E8 !important; }
+
+        div[data-testid="stMetric"] {
+            background: #16283F !important; border: 1px solid #29405E !important;
+        }
+        div[data-testid="stMetricLabel"] { color: #B7CBE3 !important; }
+        div[data-testid="stMetricValue"] { color: #7FB3E8 !important; }
+
+        div[data-testid="stVerticalBlockBorderWrapper"] {
+            background: #16283F !important; border-color: #29405E !important;
+        }
+
+        .skill-row span:first-child { color: #EAF2FB !important; }
+        .skill-bar-bg { background: #29405E !important; border-color: #3A5478 !important; }
+        .skill-bar-fill { background: linear-gradient(90deg, #4A90D9, #7FB3E8) !important; }
+
+        .cert-title h3 { color: #EAF2FB !important; }
+
+        hr { border-color: #29405E !important; }
+
+        .landing-title, .landing-role { color: #EAF2FB !important; }
+        .landing-desc { color: #B7CBE3 !important; }
+        .landing-social a { color: #EAF2FB !important; }
+
+        .float-badge { background: #EAF2FB !important; border-color: #29405E !important; }
+
+        .stDownloadButton>button, .stLinkButton>a, .stButton>button {
+            background-color: #4A90D9 !important; color: #0F1C2E !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+
 def _img_b64(path):
     if path.exists():
         with open(path, "rb") as f:
@@ -263,12 +313,13 @@ if page == "Home":
     photo_html = f'<img src="data:image/jpeg;base64,{_profile_b64}" class="landing-photo">' if _profile_b64 else '<div class="landing-photo landing-photo-placeholder">📷</div>'
 
     _skill_badges = [
-        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg", "Angular"),
-        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "JavaScript"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", "Python"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "HTML5"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "Firebase"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "Git"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftoffice.svg", "Microsoft Office"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/powerbi.svg", "Power BI"),
+        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tableau.svg", "Tableau"),
     ]
     _n = len(_skill_badges)
     _radius_px = 155  # pixels from center - clear of the ring

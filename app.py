@@ -162,7 +162,7 @@ st.markdown("""
     .landing-social a:hover { border-bottom: 1px solid #2E75B6; }
 
     .landing-right {
-        flex: 1 1 380px; min-width: 380px; height: 400px;
+        flex: 1 1 340px; min-width: 340px; height: 360px;
         display: flex; align-items: center; justify-content: center;
         position: relative;
     }
@@ -263,23 +263,15 @@ if page == "Home":
     photo_html = f'<img src="data:image/jpeg;base64,{_profile_b64}" class="landing-photo">' if _profile_b64 else '<div class="landing-photo landing-photo-placeholder">📷</div>'
 
     _skill_badges = [
-        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", "Python"),
-        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "JavaScript"),
-        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "TypeScript"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg", "Angular"),
-        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg", "Java"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "JavaScript"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", "Python"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "HTML5"),
-        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "Git"),
         ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "Firebase"),
-        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "Figma"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/powerbi.svg", "Power BI"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tableau.svg", "Tableau"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftword.svg", "Word"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftexcel.svg", "Excel"),
-        ("https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftpowerpoint.svg", "PowerPoint"),
+        ("https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "Git"),
     ]
     _n = len(_skill_badges)
-    _radius_px = 175  # pixels from center - clear of the ring
+    _radius_px = 155  # pixels from center - clear of the ring
     badge_html = ""
     for _i, (_url, _alt) in enumerate(_skill_badges):
         _angle = (2 * math.pi * _i / _n) - (math.pi / 2)
@@ -331,9 +323,9 @@ if page == "Home":
     # --- Column 1: Highlights + small Experience chart ---
     with col1:
         st.subheader("⭐ Highlights")
-        st.write("• Built full IoT-to-cloud energy system")
+        st.write("• Built a full IoT-to-cloud energy system")
         st.write("• Certified in Python & Web Design")
-        st.write("• Hands-on with hardware & software both")
+        st.write("• 5+ years combined work & IT experience")
 
         st.markdown("---")
         st.markdown('<h3 style="white-space: nowrap; font-size: 19px;">📈 Experience Overview</h3>', unsafe_allow_html=True)
@@ -352,31 +344,24 @@ if page == "Home":
         st.subheader("👋 About Me")
         st.write(
             "Hello! I'm Shan Bhathiya Nawarthna, a Bachelor of Applied Information Technology (DAIT) "
-            "undergraduate at SLTC Research University with a passion for developing innovative "
-            "software solutions and transforming data into meaningful insights."
+            "undergraduate at SLTC Research University. Before moving into IT, I worked in banking "
+            "customer service and production data entry — roles that built the attention to detail, "
+            "problem-solving, and communication skills I now bring to software development."
         )
         st.write(
-            "My interests include Software Engineering, Web Development, Business Intelligence (BI), "
-            "Data Science, Data Analytics, Artificial Intelligence (AI), and the Internet of Things "
-            "(IoT). I enjoy designing applications, analyzing data, and creating interactive "
-            "dashboards that help organizations make better data-driven decisions."
+            "I'm focused on web development, with growing experience in Angular, JavaScript, "
+            "TypeScript, Python, Java, HTML, CSS, SQL, Firebase, and Git. I'm also exploring "
+            "Business Intelligence and data analytics (Power BI, Tableau) as a way to combine my "
+            "interest in building applications with making sense of data."
         )
         st.write(
-            "I have experience working with Angular, JavaScript, TypeScript, Python, Java, HTML, CSS, "
-            "SQL, Firebase, Git, Power BI, and Tableau. I am familiar with data analysis, data "
-            "visualization, dashboard development, database management, and business intelligence "
-            "concepts, allowing me to transform complex datasets into valuable insights."
+            "Through academic and personal projects, I've developed web applications, IoT-based "
+            "systems, and data-driven solutions — applying the same accuracy and follow-through I "
+            "relied on when handling customer accounts and production records."
         )
         st.write(
-            "Through academic and personal projects, I have developed web applications, IoT-based "
-            "systems, cloud solutions, and data-driven applications while improving my skills in "
-            "software development, problem-solving, analytical thinking, and teamwork."
-        )
-        st.write(
-            "I am a motivated and continuous learner who is always eager to explore emerging "
-            "technologies and enhance my technical skills. My career goal is to become a Software "
-            "Engineer, Data Analyst, Business Intelligence Developer, or Data Scientist and "
-            "contribute to creating innovative technology solutions that deliver real-world value."
+            "I'm a motivated, continuous learner looking to start my career as a Web Developer, "
+            "and to grow toward roles in software engineering or business intelligence over time."
         )
 
     # --- Column 3: Skills ---

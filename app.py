@@ -396,7 +396,7 @@ if page == "Home":
         st.write(
             "Hello! I'm Shan Bhathiya Nawarthna, a Bachelor of Applied Information Technology (DAIT) "
             "undergraduate at SLTC Research University. Before moving into IT, I worked in banking "
-            "customer service and production data entry — roles that built the attention to detail, "
+            "customer service and production data entry roles that built the attention to detail, "
             "problem-solving, and communication skills I now bring to software development."
         )
         st.write(
@@ -407,7 +407,7 @@ if page == "Home":
         )
         st.write(
             "Through academic and personal projects, I've developed web applications, IoT-based "
-            "systems, and data-driven solutions — applying the same accuracy and follow-through I "
+            "systems, and data-driven solutions applying the same accuracy and follow-through I "
             "relied on when handling customer accounts and production records."
         )
         st.write(

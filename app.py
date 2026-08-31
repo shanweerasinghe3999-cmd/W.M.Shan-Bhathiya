@@ -365,7 +365,7 @@ if page == "Home":
     st.markdown("""
     <div class="big-stat-row">
         <div class="big-stat-item"><div class="num">1</div><div class="label">Major Project</div></div>
-        <div class="big-stat-item"><div class="num">3</div><div class="label">Certifications</div></div>
+        <div class="big-stat-item"><div class="num">4</div><div class="label">Certifications</div></div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -522,7 +522,7 @@ elif page == "Certifications":
     st.title("🎓 Certifications")
     st.caption("Online learning programmes — Centre for Open & Distance Learning (CODL), University of Moratuwa")
 
-    c1, c2, c3 = st.columns(3)
+    c1, c2, c3, c4 = st.columns(4)
     with c1:
         with st.container(border=True):
             cert_path = Path(__file__).parent / "cert_python_beginners.jpg"
@@ -552,6 +552,16 @@ elif page == "Certifications":
             st.caption("Dept. of Information Technology")
             st.write("Issued: 2025")
             st.write("Code: v6RIWfKclG")
+            st.link_button("🔗 Verify", "https://open.uom.lk/verify")
+    with c4:
+        with st.container(border=True):
+            cert_path = Path(__file__).parent / "cert_frontend_webdev.jpg"
+            if cert_path.exists():
+                st.image(str(cert_path), use_container_width=True)
+            st.markdown('<div class="cert-title"><h3>Front-End Web Development</h3></div>', unsafe_allow_html=True)
+            st.caption("Dept. of Information Technology")
+            st.write("Issued: 2025")
+            st.write("Code: dRTkDGSG8K")
             st.link_button("🔗 Verify", "https://open.uom.lk/verify")
 
 # -------------------- CONTACT PAGE --------------------

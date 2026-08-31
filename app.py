@@ -64,21 +64,6 @@ st.markdown("""
         text-align: left !important;
     }
 
-    /* Equal-height cards: force it directly on the card box itself so it
-       doesn't depend on how many wrapper layers Streamlit renders around it.
-       Scoped to the Certifications row only via its container key. */
-    .st-key-certs_row div[data-testid="stVerticalBlockBorderWrapper"] {
-        min-height: 620px;
-        display: flex; flex-direction: column;
-    }
-    .st-key-certs_row div[data-testid="stVerticalBlockBorderWrapper"] > div {
-        flex: 1; display: flex; flex-direction: column;
-    }
-    /* Push the Verify button to the bottom of the card, regardless of text length above it */
-    .st-key-certs_row div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="element-container"]:has(.stLinkButton) {
-        margin-top: auto; padding-top: 10px;
-    }
-
     /* Sidebar polish */
     section[data-testid="stSidebar"] {
         border-right: 1px solid #CFE2F5;
@@ -279,8 +264,16 @@ st.markdown("""
     .float-badge img { width: 20px; height: 20px; object-fit: contain; }
 
     /* Certification card title - fixed height so cards align regardless of title length */
-    .cert-title { min-height: 76px; display: flex; align-items: flex-end; }
+    .cert-body { min-height: 235px; display: flex; flex-direction: column; padding-top: 14px; }
+    .cert-title { min-height: 50px; display: flex; align-items: flex-start; margin-bottom: 8px; }
     .cert-title h3 { margin: 0; border-bottom: none !important; line-height: 1.25; font-size: 17px; text-align: left !important; }
+    .cert-dept { color: #8a97a8; font-size: 14px; line-height: 1.4; min-height: 40px; margin-bottom: 10px; }
+    .cert-meta { font-size: 14.5px; font-weight: 600; margin-bottom: 6px; }
+    .cert-no-verify {
+        display: inline-block; margin-top: 6px; padding: 8px 16px;
+        border-radius: 8px; font-size: 13.5px; font-weight: 600;
+        background: rgba(255,255,255,0.06); color: #8a97a8;
+    }
 
     /* Responsive: smaller screens */
     @media (max-width: 900px) {
@@ -650,51 +643,86 @@ elif page == "Projects":
 # -------------------- CERTIFICATIONS PAGE --------------------
 elif page == "Certifications":
     st.title("🎓 Certifications")
-    st.caption("Online learning programmes — Centre for Open & Distance Learning (CODL), University of Moratuwa")
+    st.caption("Online learning programmes, workshops, and courses completed")
 
-    certs_wrap = st.container(key="certs_row")
-    with certs_wrap:
-        c1, c2, c3, c4 = st.columns(4)
-        with c1:
-            with st.container(border=True):
-                cert_path = Path(__file__).parent / "cert_python_beginners.jpg"
-                if cert_path.exists():
-                    st.image(str(cert_path), use_container_width=True)
-                st.markdown('<div class="cert-title"><h3>Python for Beginners</h3></div>', unsafe_allow_html=True)
-                st.caption("Dept. of Computer Science & Engineering")
-                st.write("Issued: Jul 2025")
-                st.write("Code: q1TNowBo5z")
-                st.link_button("🔗 Verify", "https://open.uom.lk/verify")
-        with c2:
-            with st.container(border=True):
-                cert_path = Path(__file__).parent / "cert_python_programming.jpg"
-                if cert_path.exists():
-                    st.image(str(cert_path), use_container_width=True)
-                st.markdown('<div class="cert-title"><h3>Python Programming</h3></div>', unsafe_allow_html=True)
-                st.caption("Dept. of Computer Science & Engineering")
-                st.write("Issued: 2025")
-                st.write("Code: A7XtQFrrIF")
-                st.link_button("🔗 Verify", "https://open.uom.lk/verify")
-        with c3:
-            with st.container(border=True):
-                cert_path = Path(__file__).parent / "cert_web_design.jpg"
-                if cert_path.exists():
-                    st.image(str(cert_path), use_container_width=True)
-                st.markdown('<div class="cert-title"><h3>Web Design for Beginners</h3></div>', unsafe_allow_html=True)
-                st.caption("Dept. of Information Technology")
-                st.write("Issued: 2025")
-                st.write("Code: v6RIWfKclG")
-                st.link_button("🔗 Verify", "https://open.uom.lk/verify")
-        with c4:
-            with st.container(border=True):
-                cert_path = Path(__file__).parent / "cert_frontend_webdev.jpg"
-                if cert_path.exists():
-                    st.image(str(cert_path), use_container_width=True)
-                st.markdown('<div class="cert-title"><h3>Front-End Web Development</h3></div>', unsafe_allow_html=True)
-                st.caption("Dept. of Information Technology")
-                st.write("Issued: 2025")
-                st.write("Code: dRTkDGSG8K")
-                st.link_button("🔗 Verify", "https://open.uom.lk/verify")
+    CERTS = [
+        {
+            "image": "cert_python_beginners.jpg",
+            "title": "Python for Beginners",
+            "dept": "Dept. of Computer Science &amp; Engineering, University of Moratuwa",
+            "issued": "Jul 2025",
+            "ref_label": "Code",
+            "ref_value": "q1TNowBo5z",
+            "verify_url": "https://open.uom.lk/verify",
+        },
+        {
+            "image": "cert_python_programming.jpg",
+            "title": "Python Programming",
+            "dept": "Dept. of Computer Science &amp; Engineering, University of Moratuwa",
+            "issued": "2025",
+            "ref_label": "Code",
+            "ref_value": "A7XtQFrrIF",
+            "verify_url": "https://open.uom.lk/verify",
+        },
+        {
+            "image": "cert_web_design.jpg",
+            "title": "Web Design for Beginners",
+            "dept": "Dept. of Information Technology, University of Moratuwa",
+            "issued": "2025",
+            "ref_label": "Code",
+            "ref_value": "v6RIWfKclG",
+            "verify_url": "https://open.uom.lk/verify",
+        },
+        {
+            "image": "cert_frontend_webdev.jpg",
+            "title": "Front-End Web Development",
+            "dept": "Dept. of Information Technology, University of Moratuwa",
+            "issued": "2025",
+            "ref_label": "Code",
+            "ref_value": "dRTkDGSG8K",
+            "verify_url": "https://open.uom.lk/verify",
+        },
+        {
+            "image": "cert_basic_computer.jpg",
+            "title": "Basic Computer Course",
+            "dept": "Zonal ICT Education Centre, Sri Jayawardhanapura Zone",
+            "issued": "2016",
+            "ref_label": "Reg. No.",
+            "ref_value": "872487",
+            "verify_url": None,
+        },
+        {
+            "image": "cert_computer_literacy.jpg",
+            "title": "Computer Literacy",
+            "dept": "The Open University of Sri Lanka",
+            "issued": "Dec 2020",
+            "ref_label": "Serial No.",
+            "ref_value": "CL2001070",
+            "verify_url": None,
+        },
+    ]
+
+    rows = [CERTS[i:i + 3] for i in range(0, len(CERTS), 3)]
+    for row in rows:
+        cols = st.columns(3)
+        for col, cert in zip(cols, row):
+            with col:
+                with st.container(border=True):
+                    cert_path = Path(__file__).parent / cert["image"]
+                    if cert_path.exists():
+                        st.image(str(cert_path), use_container_width=True)
+                    st.markdown(f"""
+                    <div class="cert-body">
+                        <div class="cert-title"><h3>{cert['title']}</h3></div>
+                        <div class="cert-dept">{cert['dept']}</div>
+                        <div class="cert-meta">Issued: {cert['issued']}</div>
+                        <div class="cert-meta">{cert['ref_label']}: {cert['ref_value']}</div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    if cert["verify_url"]:
+                        st.link_button("🔗 Verify", cert["verify_url"])
+                    else:
+                        st.markdown('<div class="cert-no-verify">📄 Physical certificate</div>', unsafe_allow_html=True)
 
 # -------------------- CONTACT PAGE --------------------
 elif page == "Contact":

@@ -165,7 +165,7 @@ st.markdown("""
     .landing-left { flex: 1 1 380px; min-width: 280px; }
     .landing-hello {
         color: #2E75B6; font-weight: 700; font-size: 16px; margin-bottom: 6px;
-        opacity: 0; animation: fadeInUp 0.6s ease-out 0.05s forwards;
+        opacity: 0; animation: fadeInUp 0.8s ease-out 0.2s forwards;
     }
     @keyframes typing {
         from { width: 0; }
@@ -184,31 +184,31 @@ st.markdown("""
         width: 18ch;
         max-width: 100%;
         border-right: 3px solid #2E75B6;
-        animation: typing 1.6s steps(20, end) 0.3s forwards,
-                   blinkCaret 0.7s step-end infinite 0.3s;
+        animation: typing 3.6s steps(20, end) 0.9s forwards,
+                   blinkCaret 0.7s step-end infinite 0.9s;
     }
     .landing-role {
         font-size: 22px; font-weight: 600; color: #12233D; margin-bottom: 16px;
-        opacity: 0; animation: fadeInUp 0.6s ease-out 0.35s forwards;
+        opacity: 0; animation: fadeInUp 0.8s ease-out 4.9s forwards;
     }
     .landing-accent { color: #2E75B6; }
     .landing-desc {
         color: #4c6b8a; font-size: 15px; max-width: 460px; margin-bottom: 22px;
-        opacity: 0; animation: fadeInUp 0.6s ease-out 0.5s forwards;
+        opacity: 0; animation: fadeInUp 0.8s ease-out 5.5s forwards;
     }
     .landing-cta-row {
         display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
-        opacity: 0; animation: fadeInUp 0.6s ease-out 0.65s forwards;
+        opacity: 0; animation: fadeInUp 0.8s ease-out 6.1s forwards;
     }
     @keyframes fadeIn {
         from { opacity: 0; }
         to   { opacity: 1; }
     }
     .landing-right {
-        opacity: 0; animation: popIn 0.7s ease-out 0.3s forwards;
+        opacity: 0; animation: popIn 1.2s ease-out 0.6s forwards;
     }
     .float-badge {
-        opacity: 0; animation: fadeIn 0.5s ease-out 0.9s forwards;
+        opacity: 0; animation: fadeIn 0.8s ease-out 2s forwards;
     }
     .landing-cta-plain {
         color: #12233D !important; font-weight: 700; font-size: 15px;

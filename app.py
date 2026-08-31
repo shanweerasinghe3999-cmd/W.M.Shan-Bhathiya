@@ -160,22 +160,23 @@ st.markdown("""
     }
     .landing-hero {
         display: flex; align-items: center; justify-content: space-between;
-        gap: 30px; padding: 30px 10px 60px 10px; flex-wrap: wrap;
+        gap: 30px; padding: 40px 34px 54px 34px; flex-wrap: wrap;
+        background: #0b0f14;
+        border-radius: 20px;
     }
     .landing-left { flex: 1 1 380px; min-width: 280px; }
 
     /* ---------- Code-editor style hero block ---------- */
     .code-editor {
-        background: #0b0f14;
+        background: transparent;
         border-radius: 12px;
-        box-shadow: 0 14px 34px rgba(0,0,0,0.35);
         overflow: hidden;
         opacity: 0; animation: fadeInUp 0.7s ease-out 0.1s forwards;
         max-width: 520px;
     }
     .code-editor-topbar {
         display: flex; align-items: center; gap: 7px;
-        padding: 10px 14px; background: #161b22; border-bottom: 1px solid #22282f;
+        padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.10);
     }
     .code-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
     .code-dot.red { background: #ff5f56; }
@@ -211,7 +212,6 @@ st.markdown("""
     .landing-cta-row {
         display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
         margin-top: 22px;
-        opacity: 0; animation: fadeInUp 0.8s ease-out 6.1s forwards;
     }
     @keyframes fadeIn {
         from { opacity: 0; }
@@ -224,14 +224,14 @@ st.markdown("""
         opacity: 0; animation: fadeIn 0.8s ease-out 2s forwards;
     }
     .landing-cta-plain {
-        color: #12233D !important; font-weight: 700; font-size: 15px;
-        text-decoration: none !important; border-bottom: 2px solid #2E75B6; padding-bottom: 2px;
+        color: #EAF2FB !important; font-weight: 700; font-size: 15px;
+        text-decoration: none !important; border-bottom: 2px solid #4A90D9; padding-bottom: 2px;
     }
     .landing-social a {
-        margin-right: 16px; color: #12233D !important; font-weight: 600; font-size: 13px;
+        margin-right: 16px; color: #B7CBE3 !important; font-weight: 600; font-size: 13px;
         text-decoration: none !important; border-bottom: 1px solid transparent;
     }
-    .landing-social a:hover { border-bottom: 1px solid #2E75B6; }
+    .landing-social a:hover { border-bottom: 1px solid #4A90D9; color: #EAF2FB !important; }
 
     .landing-right {
         flex: 1 1 340px; min-width: 340px; height: 360px;
@@ -452,7 +452,7 @@ if page == "Home":
                     {code_lines_html}
                 </div>
             </div>
-            <div class="landing-cta-row" style="animation-delay:{cta_delay:.2f}s;">
+            <div class="landing-cta-row">
                 <a href="#about-me" class="landing-cta-plain">About Me</a>
                 <span class="landing-social">
                     <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>

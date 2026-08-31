@@ -462,7 +462,7 @@ if page == "Home":
         </div>
     </div>
     <div class="landing-cta-row">
-        <a href="#about-me" class="landing-cta-plain">About Me</a>
+        <a href="javascript:void(0)" onclick="var el=document.getElementById('about-me'); if(el){{el.scrollIntoView({{behavior:'smooth'}});}}" class="landing-cta-plain">About Me</a>
         <span class="landing-social">
             <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>
             <a href="https://github.com/shanweerasinghe3999-cmd" target="_blank">GitHub</a>

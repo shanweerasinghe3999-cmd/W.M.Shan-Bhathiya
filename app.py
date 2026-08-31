@@ -58,6 +58,12 @@ st.markdown("""
         border-color: #CFE2F5 !important;
         box-shadow: 0 2px 6px rgba(46,117,182,0.10);
     }
+    div[data-testid="stVerticalBlockBorderWrapper"] p,
+    div[data-testid="stVerticalBlockBorderWrapper"] li,
+    div[data-testid="stVerticalBlockBorderWrapper"] .stMarkdown,
+    div[data-testid="stVerticalBlockBorderWrapper"] .stCaption {
+        text-align: left !important;
+    }
 
     /* Sidebar polish */
     section[data-testid="stSidebar"] {
@@ -161,9 +167,25 @@ st.markdown("""
         color: #2E75B6; font-weight: 700; font-size: 16px; margin-bottom: 6px;
         opacity: 0; animation: fadeInUp 0.6s ease-out 0.05s forwards;
     }
+    @keyframes typing {
+        from { width: 0; }
+        to   { width: 100%; }
+    }
+    @keyframes blinkCaret {
+        from, to { border-color: transparent; }
+        50%      { border-color: #2E75B6; }
+    }
     .landing-title {
         font-size: 40px; font-weight: 800; color: #12233D; margin: 0 0 4px 0; border-bottom: none !important;
-        opacity: 0; animation: fadeInUp 0.6s ease-out 0.2s forwards;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        vertical-align: bottom;
+        width: 18ch;
+        max-width: 100%;
+        border-right: 3px solid #2E75B6;
+        animation: typing 1.6s steps(20, end) 0.3s forwards,
+                   blinkCaret 0.7s step-end infinite 0.3s;
     }
     .landing-role {
         font-size: 22px; font-weight: 600; color: #12233D; margin-bottom: 16px;

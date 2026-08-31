@@ -20,6 +20,7 @@ with st.sidebar:
 st.markdown("""
 <style>
     p, li, .stMarkdown, .stCaption { text-align: justify; }
+    .bullet-plain { text-align: left !important; margin-bottom: 0.6em; line-height: 1.5; }
 
     /* Sidebar text: left-align + proper wrapping (justify stretches badly in narrow sidebar) */
     section[data-testid="stSidebar"] p,
@@ -135,10 +136,10 @@ st.markdown("""
 
     /* Custom skill bars (replacing default st.progress look) */
     .skill-list { margin-top: 4px; }
-    .skill-item { margin-bottom: 16px; }
+    .skill-item { margin-bottom: 8px; }
     .skill-row {
         display: flex; justify-content: space-between; align-items: baseline;
-        font-size: 14px; font-weight: 600; color: #1B4A7A; margin-bottom: 6px;
+        font-size: 14px; font-weight: 600; color: #1B4A7A; margin-bottom: 3px;
     }
     .skill-pct { color: #2E75B6; font-weight: 700; font-size: 13px; }
     .skill-bar-bg {
@@ -315,6 +316,7 @@ if dark_mode:
 
         .landing-cta-plain { color: #EAF2FB !important; }
         .landing-social a { color: #B7CBE3 !important; }
+        .bullet-plain { color: #EAF2FB !important; }
 
         .float-badge { background: #EAF2FB !important; border-color: #29405E !important; }
 
@@ -482,9 +484,11 @@ if page == "Home":
     # --- Column 1: Highlights + small Experience chart ---
     with col1:
         st.subheader("⭐ Highlights")
-        st.write("• Built a full IoT-to-cloud energy system")
-        st.write("• Certified in Python & Web Design")
-        st.write("• 5+ years combined work & IT experience")
+        st.markdown("""
+        <div class="bullet-plain">• Built a full IoT-to-cloud energy system</div>
+        <div class="bullet-plain">• Certified in Python &amp; Web Design</div>
+        <div class="bullet-plain">• 5+ years combined work &amp; IT experience</div>
+        """, unsafe_allow_html=True)
 
         st.markdown("---")
         st.markdown('<h3 style="white-space: nowrap; font-size: 19px;">📈 Experience Overview</h3>', unsafe_allow_html=True)

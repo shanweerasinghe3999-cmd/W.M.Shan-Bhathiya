@@ -163,41 +163,54 @@ st.markdown("""
         gap: 30px; padding: 30px 10px 60px 10px; flex-wrap: wrap;
     }
     .landing-left { flex: 1 1 380px; min-width: 280px; }
-    .landing-hello {
-        color: #2E75B6; font-weight: 700; font-size: 16px; margin-bottom: 6px;
-        opacity: 0; animation: fadeInUp 0.8s ease-out 0.2s forwards;
-    }
-    @keyframes typing {
-        from { width: 0; }
-        to   { width: 100%; }
-    }
-    @keyframes blinkCaret {
-        from, to { border-color: transparent; }
-        50%      { border-color: #2E75B6; }
-    }
-    .landing-title {
-        font-size: 40px; font-weight: 800; color: #12233D; margin: 0 0 4px 0; border-bottom: none !important;
-        display: inline-block;
+
+    /* ---------- Code-editor style hero block ---------- */
+    .code-editor {
+        background: #0b0f14;
+        border-radius: 12px;
+        box-shadow: 0 14px 34px rgba(0,0,0,0.35);
         overflow: hidden;
-        white-space: nowrap;
-        vertical-align: bottom;
-        width: 18ch;
-        max-width: 100%;
-        border-right: 3px solid #2E75B6;
-        animation: typing 3.6s steps(20, end) 0.9s forwards,
-                   blinkCaret 0.7s step-end infinite 0.9s;
+        opacity: 0; animation: fadeInUp 0.7s ease-out 0.1s forwards;
+        max-width: 520px;
     }
-    .landing-role {
-        font-size: 22px; font-weight: 600; color: #12233D; margin-bottom: 16px;
-        opacity: 0; animation: fadeInUp 0.8s ease-out 4.9s forwards;
+    .code-editor-topbar {
+        display: flex; align-items: center; gap: 7px;
+        padding: 10px 14px; background: #161b22; border-bottom: 1px solid #22282f;
+    }
+    .code-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+    .code-dot.red { background: #ff5f56; }
+    .code-dot.yellow { background: #ffbd2e; }
+    .code-dot.green { background: #27c93f; }
+    .code-editor-filename {
+        margin-left: 10px; color: #6e7681; font-size: 12.5px; font-family: 'Consolas','Monaco','Courier New',monospace;
+    }
+    .code-editor-body {
+        padding: 22px 24px 26px 24px;
+        font-family: 'Consolas','Monaco','Courier New',monospace;
+        font-size: 15px; line-height: 1.85;
+    }
+    .code-line {
+        display: block;
+        overflow: hidden;
+        white-space: pre;
+        width: 0;
+        border-right: 2px solid transparent;
+        animation-name: typeLine;
+        animation-fill-mode: forwards;
+    }
+    .code-line-blank { height: 14px; }
+    .code-plain { color: #4AF626; }
+    .code-comment { color: #6a9955; font-style: italic; }
+    .code-string { color: #ce9178; }
+    @keyframes typeLine {
+        0%    { width: 0; border-color: #4AF626; }
+        99.9% { border-color: #4AF626; }
+        100%  { width: var(--chars); border-color: transparent; }
     }
     .landing-accent { color: #2E75B6; }
-    .landing-desc {
-        color: #4c6b8a; font-size: 15px; max-width: 460px; margin-bottom: 22px;
-        opacity: 0; animation: fadeInUp 0.8s ease-out 5.5s forwards;
-    }
     .landing-cta-row {
         display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+        margin-top: 22px;
         opacity: 0; animation: fadeInUp 0.8s ease-out 6.1s forwards;
     }
     @keyframes fadeIn {
@@ -257,7 +270,7 @@ st.markdown("""
     /* Responsive: smaller screens */
     @media (max-width: 900px) {
         .landing-hero { flex-direction: column; text-align: center; }
-        .landing-desc { max-width: 100%; }
+        .code-editor { max-width: 100%; text-align: left; }
         .landing-cta-row { justify-content: center; }
         .landing-right { height: 360px; min-width: 340px; }
         .landing-photo { width: 150px; height: 150px; }
@@ -300,8 +313,6 @@ if dark_mode:
 
         hr { border-color: #29405E !important; }
 
-        .landing-title, .landing-role { color: #EAF2FB !important; }
-        .landing-desc { color: #B7CBE3 !important; }
         .landing-social a { color: #EAF2FB !important; }
 
         .float-badge { background: #EAF2FB !important; border-color: #29405E !important; }
@@ -388,17 +399,60 @@ if page == "Home":
             f'transform: translate(-50%,-50%);"><img src="{_url}" alt="{_alt}"></div>'
         )
 
+    # Build the "code editor" typewriter block
+    import html as _html
+    CODE_LINES = [
+        ("// Hello 👋", "comment"),
+        ("const developer = {", "plain"),
+        ('    name: "Shan Bhathiya",', "plain"),
+        ('    role: "Web Developer",', "plain"),
+        ("};", "plain"),
+        None,  # blank spacer line
+        ("/* Final-year Bachelor of Applied IT undergraduate,", "comment"),
+        ("   comfortable across web development, networking,", "comment"),
+        ("   cyber security, and embedded hardware. */", "comment"),
+        None,
+        ("run(developer);", "plain"),
+    ]
+    CHAR_SECONDS = 0.055   # typing speed per character (slow, deliberate)
+    LINE_PAUSE = 0.28      # pause between lines
+    _t = 0.4               # initial pause before typing starts
+
+    code_lines_html = ""
+    for _line in CODE_LINES:
+        if _line is None:
+            code_lines_html += '<div class="code-line-blank"></div>'
+            _t += 0.2
+            continue
+        _text, _kind = _line
+        _n = max(len(_text), 1)
+        _dur = max(_n * CHAR_SECONDS, 0.25)
+        _cls = "code-comment" if _kind == "comment" else "code-plain"
+        _safe = _html.escape(_text)
+        code_lines_html += (
+            f'<div class="code-line {_cls}" style="--chars:{_n}ch; '
+            f'animation-duration:{_dur:.2f}s; animation-delay:{_t:.2f}s; '
+            f'animation-timing-function:steps({_n},end);">{_safe}</div>'
+        )
+        _t += _dur + LINE_PAUSE
+
+    cta_delay = _t + 0.3  # let CTA links fade in right after typing wraps up
+
     st.markdown(f"""
     <div class="landing-hero">
         <div class="landing-left">
-            <div class="landing-hello">Hello</div>
-            <h1 class="landing-title">I'm <span class="landing-accent">Shan Bhathiya</span></h1>
-            <div class="landing-role"><span class="landing-accent">Web Developer</span></div>
-            <p class="landing-desc">
-                Final-year Bachelor of Applied IT undergraduate, comfortable across
-                web development, networking, cyber security, and embedded hardware.
-            </p>
-            <div class="landing-cta-row">
+            <div class="code-editor">
+                <div class="code-editor-topbar">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span class="code-editor-filename">shan.js</span>
+                </div>
+                <div class="code-editor-body">
+                    {code_lines_html}
+                </div>
+            </div>
+            <div class="landing-cta-row" style="animation-delay:{cta_delay:.2f}s;">
                 <a href="#about-me" class="landing-cta-plain">About Me</a>
                 <span class="landing-social">
                     <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>

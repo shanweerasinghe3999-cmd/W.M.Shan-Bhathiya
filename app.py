@@ -211,7 +211,7 @@ st.markdown("""
     .landing-accent { color: #2E75B6; }
     .landing-cta-row {
         display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
-        margin-top: 22px;
+        margin: 24px 0 10px 0; padding: 0 10px;
     }
     @keyframes fadeIn {
         from { opacity: 0; }
@@ -224,14 +224,14 @@ st.markdown("""
         opacity: 0; animation: fadeIn 0.8s ease-out 2s forwards;
     }
     .landing-cta-plain {
-        color: #EAF2FB !important; font-weight: 700; font-size: 15px;
-        text-decoration: none !important; border-bottom: 2px solid #4A90D9; padding-bottom: 2px;
+        color: #12233D !important; font-weight: 700; font-size: 15px;
+        text-decoration: none !important; border-bottom: 2px solid #2E75B6; padding-bottom: 2px;
     }
     .landing-social a {
-        margin-right: 16px; color: #B7CBE3 !important; font-weight: 600; font-size: 13px;
+        margin-right: 16px; color: #12233D !important; font-weight: 600; font-size: 13px;
         text-decoration: none !important; border-bottom: 1px solid transparent;
     }
-    .landing-social a:hover { border-bottom: 1px solid #4A90D9; color: #EAF2FB !important; }
+    .landing-social a:hover { border-bottom: 1px solid #2E75B6; }
 
     .landing-right {
         flex: 1 1 340px; min-width: 340px; height: 360px;
@@ -313,7 +313,8 @@ if dark_mode:
 
         hr { border-color: #29405E !important; }
 
-        .landing-social a { color: #EAF2FB !important; }
+        .landing-cta-plain { color: #EAF2FB !important; }
+        .landing-social a { color: #B7CBE3 !important; }
 
         .float-badge { background: #EAF2FB !important; border-color: #29405E !important; }
 
@@ -436,8 +437,6 @@ if page == "Home":
         )
         _t += _dur + LINE_PAUSE
 
-    cta_delay = _t + 0.3  # let CTA links fade in right after typing wraps up
-
     st.markdown(f"""
     <div class="landing-hero">
         <div class="landing-left">
@@ -452,14 +451,6 @@ if page == "Home":
                     {code_lines_html}
                 </div>
             </div>
-            <div class="landing-cta-row">
-                <a href="#about-me" class="landing-cta-plain">About Me</a>
-                <span class="landing-social">
-                    <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>
-                    <a href="https://github.com/shanweerasinghe3999-cmd" target="_blank">GitHub</a>
-                    <a href="mailto:shanweerasinghe3999@gmail.com">Email</a>
-                </span>
-            </div>
         </div>
         <div class="landing-right">
             <div class="deco-ring ring-1"></div>
@@ -467,6 +458,14 @@ if page == "Home":
             {badge_html}
             {photo_html}
         </div>
+    </div>
+    <div class="landing-cta-row">
+        <a href="#about-me" class="landing-cta-plain">About Me</a>
+        <span class="landing-social">
+            <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>
+            <a href="https://github.com/shanweerasinghe3999-cmd" target="_blank">GitHub</a>
+            <a href="mailto:shanweerasinghe3999@gmail.com">Email</a>
+        </span>
     </div>
 
     """, unsafe_allow_html=True)

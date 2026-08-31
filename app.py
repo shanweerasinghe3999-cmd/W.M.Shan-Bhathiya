@@ -479,7 +479,7 @@ if page == "Home":
     </div>
     """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3 = st.columns([1, 2.4, 0.8], gap="small")
 
     # --- Column 1: Highlights + small Experience chart ---
     with col1:

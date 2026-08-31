@@ -12,9 +12,7 @@ st.set_page_config(
     layout="wide"
 )
 
-with st.sidebar:
-    dark_mode = st.toggle("🌙 Dark Mode", value=st.session_state.get("dark_mode", False))
-    st.session_state["dark_mode"] = dark_mode
+dark_mode = True
 
 # Professional styling layer
 st.markdown("""
@@ -36,7 +34,7 @@ st.markdown("""
     html, body, [class*="css"] { font-family: 'Segoe UI', 'Inter', sans-serif; }
 
     /* Headers with accent underline */
-    h1, h2, h3 { font-weight: 800; letter-spacing: -0.3px; }
+    h1, h2, h3 { font-weight: 800; letter-spacing: -0.3px; font-family: 'Times New Roman', Georgia, 'Cambria', serif; }
     h2, h3 { border-bottom: 3px solid #4A90D9; padding-bottom: 6px; margin-top: 4px; color: #1B4A7A !important; }
 
     /* Links */
@@ -64,6 +62,12 @@ st.markdown("""
     div[data-testid="stVerticalBlockBorderWrapper"] .stMarkdown,
     div[data-testid="stVerticalBlockBorderWrapper"] .stCaption {
         text-align: left !important;
+    }
+
+    /* Equal-height cards across a row of columns (e.g. certification cards) */
+    div[data-testid="column"] > div { height: 100%; }
+    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] {
+        height: 100%; display: flex; flex-direction: column;
     }
 
     /* Sidebar polish */

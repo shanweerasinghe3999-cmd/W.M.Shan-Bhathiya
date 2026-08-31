@@ -64,27 +64,18 @@ st.markdown("""
         text-align: left !important;
     }
 
-    /* Equal-height cards across a row of columns (e.g. certification cards) */
-    div[data-testid="stHorizontalBlock"] { align-items: stretch; }
-    div[data-testid="column"] {
+    /* Equal-height cards: force it directly on the card box itself so it
+       doesn't depend on how many wrapper layers Streamlit renders around it.
+       Scoped to the Certifications row only via its container key. */
+    .st-key-certs_row div[data-testid="stVerticalBlockBorderWrapper"] {
+        min-height: 620px;
         display: flex; flex-direction: column;
     }
-    div[data-testid="column"] > div[data-testid="stVerticalBlock"] {
-        display: flex; flex-direction: column; flex: 1;
-    }
-    div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div[data-testid="element-container"] {
-        display: flex; flex-direction: column; flex: 1;
-    }
-    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] {
-        flex: 1; display: flex; flex-direction: column; width: 100%;
-    }
-    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] > div {
+    .st-key-certs_row div[data-testid="stVerticalBlockBorderWrapper"] > div {
         flex: 1; display: flex; flex-direction: column;
     }
-    /* Push the Verify/action button to the bottom of the card, regardless of text length above it */
-    div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="element-container"]:has(.stLinkButton),
-    div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="element-container"]:has(.stButton),
-    div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="element-container"]:has(.stDownloadButton) {
+    /* Push the Verify button to the bottom of the card, regardless of text length above it */
+    .st-key-certs_row div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="element-container"]:has(.stLinkButton) {
         margin-top: auto; padding-top: 10px;
     }
 
@@ -661,47 +652,49 @@ elif page == "Certifications":
     st.title("🎓 Certifications")
     st.caption("Online learning programmes — Centre for Open & Distance Learning (CODL), University of Moratuwa")
 
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        with st.container(border=True):
-            cert_path = Path(__file__).parent / "cert_python_beginners.jpg"
-            if cert_path.exists():
-                st.image(str(cert_path), use_container_width=True)
-            st.markdown('<div class="cert-title"><h3>Python for Beginners</h3></div>', unsafe_allow_html=True)
-            st.caption("Dept. of Computer Science & Engineering")
-            st.write("Issued: Jul 2025")
-            st.write("Code: q1TNowBo5z")
-            st.link_button("🔗 Verify", "https://open.uom.lk/verify")
-    with c2:
-        with st.container(border=True):
-            cert_path = Path(__file__).parent / "cert_python_programming.jpg"
-            if cert_path.exists():
-                st.image(str(cert_path), use_container_width=True)
-            st.markdown('<div class="cert-title"><h3>Python Programming</h3></div>', unsafe_allow_html=True)
-            st.caption("Dept. of Computer Science & Engineering")
-            st.write("Issued: 2025")
-            st.write("Code: A7XtQFrrIF")
-            st.link_button("🔗 Verify", "https://open.uom.lk/verify")
-    with c3:
-        with st.container(border=True):
-            cert_path = Path(__file__).parent / "cert_web_design.jpg"
-            if cert_path.exists():
-                st.image(str(cert_path), use_container_width=True)
-            st.markdown('<div class="cert-title"><h3>Web Design for Beginners</h3></div>', unsafe_allow_html=True)
-            st.caption("Dept. of Information Technology")
-            st.write("Issued: 2025")
-            st.write("Code: v6RIWfKclG")
-            st.link_button("🔗 Verify", "https://open.uom.lk/verify")
-    with c4:
-        with st.container(border=True):
-            cert_path = Path(__file__).parent / "cert_frontend_webdev.jpg"
-            if cert_path.exists():
-                st.image(str(cert_path), use_container_width=True)
-            st.markdown('<div class="cert-title"><h3>Front-End Web Development</h3></div>', unsafe_allow_html=True)
-            st.caption("Dept. of Information Technology")
-            st.write("Issued: 2025")
-            st.write("Code: dRTkDGSG8K")
-            st.link_button("🔗 Verify", "https://open.uom.lk/verify")
+    certs_wrap = st.container(key="certs_row")
+    with certs_wrap:
+        c1, c2, c3, c4 = st.columns(4)
+        with c1:
+            with st.container(border=True):
+                cert_path = Path(__file__).parent / "cert_python_beginners.jpg"
+                if cert_path.exists():
+                    st.image(str(cert_path), use_container_width=True)
+                st.markdown('<div class="cert-title"><h3>Python for Beginners</h3></div>', unsafe_allow_html=True)
+                st.caption("Dept. of Computer Science & Engineering")
+                st.write("Issued: Jul 2025")
+                st.write("Code: q1TNowBo5z")
+                st.link_button("🔗 Verify", "https://open.uom.lk/verify")
+        with c2:
+            with st.container(border=True):
+                cert_path = Path(__file__).parent / "cert_python_programming.jpg"
+                if cert_path.exists():
+                    st.image(str(cert_path), use_container_width=True)
+                st.markdown('<div class="cert-title"><h3>Python Programming</h3></div>', unsafe_allow_html=True)
+                st.caption("Dept. of Computer Science & Engineering")
+                st.write("Issued: 2025")
+                st.write("Code: A7XtQFrrIF")
+                st.link_button("🔗 Verify", "https://open.uom.lk/verify")
+        with c3:
+            with st.container(border=True):
+                cert_path = Path(__file__).parent / "cert_web_design.jpg"
+                if cert_path.exists():
+                    st.image(str(cert_path), use_container_width=True)
+                st.markdown('<div class="cert-title"><h3>Web Design for Beginners</h3></div>', unsafe_allow_html=True)
+                st.caption("Dept. of Information Technology")
+                st.write("Issued: 2025")
+                st.write("Code: v6RIWfKclG")
+                st.link_button("🔗 Verify", "https://open.uom.lk/verify")
+        with c4:
+            with st.container(border=True):
+                cert_path = Path(__file__).parent / "cert_frontend_webdev.jpg"
+                if cert_path.exists():
+                    st.image(str(cert_path), use_container_width=True)
+                st.markdown('<div class="cert-title"><h3>Front-End Web Development</h3></div>', unsafe_allow_html=True)
+                st.caption("Dept. of Information Technology")
+                st.write("Issued: 2025")
+                st.write("Code: dRTkDGSG8K")
+                st.link_button("🔗 Verify", "https://open.uom.lk/verify")
 
 # -------------------- CONTACT PAGE --------------------
 elif page == "Contact":

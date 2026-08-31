@@ -69,22 +69,22 @@ st.markdown("""
     div[data-testid="column"] {
         display: flex; flex-direction: column;
     }
-    div[data-testid="column"] > div {
+    div[data-testid="column"] > div[data-testid="stVerticalBlock"] {
         display: flex; flex-direction: column; flex: 1;
     }
-    div[data-testid="column"] div[data-testid="stVerticalBlock"] {
+    div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div[data-testid="element-container"] {
         display: flex; flex-direction: column; flex: 1;
     }
     div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] {
-        flex: 1; display: flex; flex-direction: column;
+        flex: 1; display: flex; flex-direction: column; width: 100%;
     }
     div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] > div {
         flex: 1; display: flex; flex-direction: column;
     }
     /* Push the Verify/action button to the bottom of the card, regardless of text length above it */
-    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] .stLinkButton,
-    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] .stButton,
-    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] .stDownloadButton {
+    div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="element-container"]:has(.stLinkButton),
+    div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="element-container"]:has(.stButton),
+    div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="element-container"]:has(.stDownloadButton) {
         margin-top: auto; padding-top: 10px;
     }
 

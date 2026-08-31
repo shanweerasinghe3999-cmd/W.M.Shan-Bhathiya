@@ -144,17 +144,50 @@ st.markdown("""
     }
 
     /* ---------- Landing-page style hero ---------- */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(18px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+        from { opacity: 0; transform: scale(0.85); }
+        to   { opacity: 1; transform: scale(1); }
+    }
     .landing-hero {
         display: flex; align-items: center; justify-content: space-between;
         gap: 30px; padding: 30px 10px 60px 10px; flex-wrap: wrap;
     }
     .landing-left { flex: 1 1 380px; min-width: 280px; }
-    .landing-hello { color: #2E75B6; font-weight: 700; font-size: 16px; margin-bottom: 6px; }
-    .landing-title { font-size: 40px; font-weight: 800; color: #12233D; margin: 0 0 4px 0; border-bottom: none !important; }
-    .landing-role { font-size: 22px; font-weight: 600; color: #12233D; margin-bottom: 16px; }
+    .landing-hello {
+        color: #2E75B6; font-weight: 700; font-size: 16px; margin-bottom: 6px;
+        opacity: 0; animation: fadeInUp 0.6s ease-out 0.05s forwards;
+    }
+    .landing-title {
+        font-size: 40px; font-weight: 800; color: #12233D; margin: 0 0 4px 0; border-bottom: none !important;
+        opacity: 0; animation: fadeInUp 0.6s ease-out 0.2s forwards;
+    }
+    .landing-role {
+        font-size: 22px; font-weight: 600; color: #12233D; margin-bottom: 16px;
+        opacity: 0; animation: fadeInUp 0.6s ease-out 0.35s forwards;
+    }
     .landing-accent { color: #2E75B6; }
-    .landing-desc { color: #4c6b8a; font-size: 15px; max-width: 460px; margin-bottom: 22px; }
-    .landing-cta-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .landing-desc {
+        color: #4c6b8a; font-size: 15px; max-width: 460px; margin-bottom: 22px;
+        opacity: 0; animation: fadeInUp 0.6s ease-out 0.5s forwards;
+    }
+    .landing-cta-row {
+        display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+        opacity: 0; animation: fadeInUp 0.6s ease-out 0.65s forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    .landing-right {
+        opacity: 0; animation: popIn 0.7s ease-out 0.3s forwards;
+    }
+    .float-badge {
+        opacity: 0; animation: fadeIn 0.5s ease-out 0.9s forwards;
+    }
     .landing-cta-plain {
         color: #12233D !important; font-weight: 700; font-size: 15px;
         text-decoration: none !important; border-bottom: 2px solid #2E75B6; padding-bottom: 2px;
@@ -197,7 +230,7 @@ st.markdown("""
 
     /* Certification card title - fixed height so cards align regardless of title length */
     .cert-title { min-height: 76px; display: flex; align-items: flex-end; }
-    .cert-title h3 { margin: 0; border-bottom: none !important; line-height: 1.25; font-size: 18px; }
+    .cert-title h3 { margin: 0; border-bottom: none !important; line-height: 1.25; font-size: 17px; text-align: left !important; }
 
     /* Responsive: smaller screens */
     @media (max-width: 900px) {

@@ -65,9 +65,27 @@ st.markdown("""
     }
 
     /* Equal-height cards across a row of columns (e.g. certification cards) */
-    div[data-testid="column"] > div { height: 100%; }
+    div[data-testid="stHorizontalBlock"] { align-items: stretch; }
+    div[data-testid="column"] {
+        display: flex; flex-direction: column;
+    }
+    div[data-testid="column"] > div {
+        display: flex; flex-direction: column; flex: 1;
+    }
+    div[data-testid="column"] div[data-testid="stVerticalBlock"] {
+        display: flex; flex-direction: column; flex: 1;
+    }
     div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] {
-        height: 100%; display: flex; flex-direction: column;
+        flex: 1; display: flex; flex-direction: column;
+    }
+    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] > div {
+        flex: 1; display: flex; flex-direction: column;
+    }
+    /* Push the Verify/action button to the bottom of the card, regardless of text length above it */
+    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] .stLinkButton,
+    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] .stButton,
+    div[data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] .stDownloadButton {
+        margin-top: auto; padding-top: 10px;
     }
 
     /* Sidebar polish */
@@ -76,6 +94,7 @@ st.markdown("""
         background: #F6FAFE;
     }
     section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2 { color: #1B4A7A !important; }
+    .sidebar-name { color: #1B4A7A; }
 
     /* Sidebar profile photo - plain rounded corners, not circular */
     section[data-testid="stSidebar"] img {
@@ -296,6 +315,7 @@ if dark_mode:
         section[data-testid="stSidebar"] div, section[data-testid="stSidebar"] label {
             color: #EAF2FB !important;
         }
+        .sidebar-name { color: #EAF2FB !important; }
         h1, h2, h3, p, li, span, div, label { color: #EAF2FB; }
         h2, h3 { border-bottom: 3px solid #4A90D9 !important; color: #EAF2FB !important; }
         a, .stMarkdown a { color: #7FB3E8 !important; }
@@ -315,6 +335,9 @@ if dark_mode:
         .skill-bar-fill { background: linear-gradient(90deg, #4A90D9, #7FB3E8) !important; }
 
         .cert-title h3 { color: #EAF2FB !important; }
+        .stat-icon-item .label { color: #B7CBE3 !important; }
+        .big-stat-item .label { color: #B7CBE3 !important; }
+        .skill-pct { color: #7FB3E8 !important; }
 
         hr { border-color: #29405E !important; }
 
@@ -350,7 +373,7 @@ with st.sidebar:
             st.caption("Add profile.jpg")
     with col_info:
         st.markdown(
-            "<div style='font-weight:800; font-size:16px; line-height:1.2; color:#1B4A7A;'>Shan Bhathiya Nawarathna</div>",
+            "<div class='sidebar-name' style='font-weight:800; font-size:16px; line-height:1.2;'>Shan Bhathiya Nawarathna</div>",
             unsafe_allow_html=True
         )
         st.caption("Bachelor of Applied IT")

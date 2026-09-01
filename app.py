@@ -35,6 +35,21 @@ st.markdown("""
     }
 
     html, body, [class*="css"] { font-family: 'Segoe UI', 'Inter', sans-serif; }
+    html, body { overflow-x: hidden; max-width: 100vw; }
+    .stApp { overflow-x: hidden; }
+    .main .block-container { max-width: 100vw; overflow-x: hidden; }
+    img, .stImage img { max-width: 100%; height: auto; }
+    @media (max-width: 640px) {
+        .main .block-container { padding-left: 14px; padding-right: 14px; }
+        div[data-testid="stHorizontalBlock"] {
+            flex-direction: column !important;
+        }
+        div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+            min-width: 100% !important;
+        }
+    }
 
     /* Headers with accent underline */
     h1, h2, h3 { font-weight: 800; letter-spacing: -0.3px; font-family: 'Times New Roman', Georgia, 'Cambria', serif; }

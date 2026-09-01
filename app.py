@@ -800,8 +800,13 @@ elif page == "Contact":
                         st.success("✅ Thanks! Your message has been sent — I'll get back to you soon.")
                     else:
                         st.error("Something went wrong sending your message. Please try emailing me directly.")
-                except Exception:
+                        with st.expander("Details (for debugging)"):
+                            st.write("Status code:", resp.status_code)
+                            st.write(result)
+                except Exception as e:
                     st.error("Something went wrong sending your message. Please try emailing me directly.")
+                    with st.expander("Details (for debugging)"):
+                        st.write(str(e))
 
                 wa_text = f"Hi Shan, I'm {name} ({email}).\n\n{message}"
                 wa_url = f"https://wa.me/94789728257?text={quote(wa_text)}"

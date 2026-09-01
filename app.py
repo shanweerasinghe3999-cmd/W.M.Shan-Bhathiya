@@ -4,7 +4,8 @@ from pathlib import Path
 import plotly.express as px
 import base64
 import math
-import requests
+import smtplib
+from email.message import EmailMessage
 from urllib.parse import quote
 
 # -------------------- PAGE SETUP --------------------
@@ -772,8 +773,6 @@ elif page == "Contact":
             )
     st.markdown("---")
 
-    WEB3FORMS_ACCESS_KEY = "1c8134e9-bcaf-4d09-ae6e-f380e871ac73"
-
     with st.form("contact_form"):
         name = st.text_input("Your name")
         email = st.text_input("Email")
@@ -784,25 +783,22 @@ elif page == "Contact":
                 st.warning("Please fill in your name, email, and message.")
             else:
                 try:
-                    resp = requests.post(
-                        "https://api.web3forms.com/submit",
-                        data={
-                            "access_key": WEB3FORMS_ACCESS_KEY,
-                            "name": name,
-                            "email": email,
-                            "message": message,
-                            "subject": f"New portfolio message from {name}",
-                        },
-                        timeout=10,
-                    )
-                    result = resp.json()
-                    if result.get("success"):
-                        st.success("✅ Thanks! Your message has been sent — I'll get back to you soon.")
-                    else:
-                        st.error("Something went wrong sending your message. Please try emailing me directly.")
-                        with st.expander("Details (for debugging)"):
-                            st.write("Status code:", resp.status_code)
-                            st.write(result)
+                    gmail_address = st.secrets["GMAIL_ADDRESS"]
+                    gmail_app_password = st.secrets["GMAIL_APP_PASSWORD"]
+
+                    msg = EmailMessage()
+                    msg["Subject"] = f"New portfolio message from {name}"
+                    msg["From"] = gmail_address
+                    msg["To"] = gmail_address
+                    msg["Reply-To"] = email
+                    msg.set_content(f"From: {name} ({email})\n\n{message}")
+
+                    with smtplib.SMTP("smtp.gmail.com", 587) as server:
+                        server.starttls()
+                        server.login(gmail_address, gmail_app_password)
+                        server.send_message(msg)
+
+                    st.success("✅ Thanks! Your message has been sent — I'll get back to you soon.")
                 except Exception as e:
                     st.error("Something went wrong sending your message. Please try emailing me directly.")
                     with st.expander("Details (for debugging)"):

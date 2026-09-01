@@ -4,6 +4,8 @@ from pathlib import Path
 import plotly.express as px
 import base64
 import math
+import requests
+from urllib.parse import quote
 
 # -------------------- PAGE SETUP --------------------
 st.set_page_config(
@@ -757,6 +759,7 @@ elif page == "Contact":
     st.write("📍 **Address:** [194/5 B, Samanala Place, Paligedara, Pilliyandala](https://www.google.com/maps/search/?api=1&query=194%2F5+B%2C+Samanala+Place%2C+Paligedara%2C+Pilliyandala) 🗺️")
     st.write("🌐 **LinkedIn:** [shan-bhathiya-1999283ab](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
     st.write("💻 **GitHub:** [shanweerasinghe3999-cmd](https://github.com/shanweerasinghe3999-cmd)")
+    st.link_button("💬 Chat on WhatsApp", "https://wa.me/94789728257")
 
     cv_path = Path(__file__).parent / "Shan_CV.pdf"
     if cv_path.exists():
@@ -769,17 +772,40 @@ elif page == "Contact":
             )
     st.markdown("---")
 
+    WEB3FORMS_ACCESS_KEY = "1c8134e9-bcaf-4d09-ae6e-f380e871ac73"
+
     with st.form("contact_form"):
         name = st.text_input("Your name")
         email = st.text_input("Email")
         message = st.text_area("Message")
         submitted = st.form_submit_button("Send message")
         if submitted:
-            st.success("✅ Thanks for your message! I'll get back to you soon.")
-            st.write("---")
-            st.write(f"**Name:** {name}")
-            st.write(f"**Email:** {email}")
-            st.write(f"**Message:** {message}")
+            if not name or not email or not message:
+                st.warning("Please fill in your name, email, and message.")
+            else:
+                try:
+                    resp = requests.post(
+                        "https://api.web3forms.com/submit",
+                        data={
+                            "access_key": WEB3FORMS_ACCESS_KEY,
+                            "name": name,
+                            "email": email,
+                            "message": message,
+                            "subject": f"New portfolio message from {name}",
+                        },
+                        timeout=10,
+                    )
+                    result = resp.json()
+                    if result.get("success"):
+                        st.success("✅ Thanks! Your message has been sent — I'll get back to you soon.")
+                    else:
+                        st.error("Something went wrong sending your message. Please try emailing me directly.")
+                except Exception:
+                    st.error("Something went wrong sending your message. Please try emailing me directly.")
+
+                wa_text = f"Hi Shan, I'm {name} ({email}).\n\n{message}"
+                wa_url = f"https://wa.me/94789728257?text={quote(wa_text)}"
+                st.link_button("💬 Or send this on WhatsApp instead", wa_url)
 
 # -------------------- FOOTER --------------------
 st.markdown("---")

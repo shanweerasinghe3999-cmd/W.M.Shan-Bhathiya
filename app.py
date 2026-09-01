@@ -277,13 +277,35 @@ st.markdown("""
 
     /* Responsive: smaller screens */
     @media (max-width: 900px) {
-        .landing-hero { flex-direction: column; text-align: center; }
+        .landing-hero { flex-direction: column; text-align: center; padding: 30px 18px 40px 18px; }
         .code-editor { max-width: 100%; text-align: left; }
         .landing-cta-row { justify-content: center; }
-        .landing-right { height: 360px; min-width: 340px; }
-        .landing-photo { width: 150px; height: 150px; }
-        .ring-1 { width: 190px; height: 190px; }
-        .ring-2 { width: 230px; height: 230px; }
+        .landing-right { height: 300px; min-width: 0; width: 100%; }
+        .landing-photo { width: 140px; height: 140px; }
+        .ring-1 { width: 180px; height: 180px; }
+        .ring-2 { width: 220px; height: 220px; }
+    }
+    @media (max-width: 560px) {
+        .landing-hero { padding: 24px 12px 34px 12px; border-radius: 14px; }
+        .code-editor-topbar { padding: 8px 0; }
+        .code-editor-body {
+            font-size: 11px; line-height: 1.7; padding: 16px 14px 18px 14px;
+            overflow-x: auto; -webkit-overflow-scrolling: touch;
+        }
+        .landing-right { height: 250px; }
+        .landing-photo { width: 110px; height: 110px; }
+        .ring-1 { width: 140px; height: 140px; }
+        .ring-2 { width: 175px; height: 175px; }
+        .float-badge { width: 30px; height: 30px; }
+        .float-badge img { width: 16px; height: 16px; }
+        .big-stat-row { gap: 26px; }
+        .big-stat-item .num { font-size: 26px; }
+        .landing-cta-row { gap: 14px; }
+        .landing-social a { margin-right: 10px; }
+        .cert-body { min-height: 0; padding-top: 12px; }
+    }
+    @media (max-width: 900px) {
+        .code-editor-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     }
 </style>
 """, unsafe_allow_html=True)

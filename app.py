@@ -435,6 +435,10 @@ with st.sidebar:
     # Jump-to-section navigation:
     # - Desktop (>640px): behaves like separate pages — shows only the clicked section
     # - Mobile (<=640px): just smooth-scrolls to that section on the single long page
+    # NOTE: st.markdown() strips inline onclick="" attributes (React sanitizes them),
+    # and st.components.v1.html() is deprecated + runs in an iframe. st.html() with
+    # unsafe_allow_javascript=True + a real <script>/addEventListener block is the
+    # only combination that reliably fires click handlers on the actual page DOM.
     NAV_ITEMS = [
         ("home", "🏠 Home"),
         ("experience", "🧳 Experience"),
@@ -444,24 +448,45 @@ with st.sidebar:
     ]
     ALL_KEYS = [k for k, _ in NAV_ITEMS]
 
-    def _nav_onclick(target_key):
-        hide_show = "".join(
-            f"var e{k}=document.querySelector('[class*=st-key-psec_{k}]');"
-            f"if(e{k}){{e{k}.classList.{'remove' if k == target_key else 'add'}('psec-force-hide');"
-            f"e{k}.classList.{'add' if k == target_key else 'remove'}('psec-force-show');}}"
-            for k in ALL_KEYS
-        )
-        return (
-            f"if(window.innerWidth>640){{{hide_show}window.scrollTo({{top:0,behavior:'instant'}});}}"
-            f"else{{var el=document.getElementById('{target_key}-section');"
-            f"if(el){{el.scrollIntoView({{behavior:'smooth'}});}}}}"
-        )
-
     nav_links_html = "".join(
-        f'<a href="javascript:void(0)" onclick="{_nav_onclick(key)}">{label}</a>'
+        f'<a href="javascript:void(0)" class="side-nav-link" data-target="{key}">{label}</a>'
         for key, label in NAV_ITEMS
     )
-    st.markdown(f'<div class="side-nav">{nav_links_html}</div>', unsafe_allow_html=True)
+
+    st.html(f"""
+    <style>
+        .side-nav {{ display: flex; flex-direction: column; gap: 4px; font-family: 'Segoe UI', sans-serif; }}
+        .side-nav a {{
+            display: block; padding: 9px 12px; border-radius: 8px;
+            color: #EAF2FB; font-weight: 600; font-size: 14.5px;
+            text-decoration: none; cursor: pointer;
+        }}
+        .side-nav a:hover {{ background: #1B4A7A; }}
+    </style>
+    <div class="side-nav">{nav_links_html}</div>
+    <script>
+    document.querySelectorAll('.side-nav-link').forEach(function(link) {{
+        link.addEventListener('click', function() {{
+            var targetKey = link.getAttribute('data-target');
+            if (window.innerWidth > 640) {{
+                var keys = {ALL_KEYS!r};
+                keys.forEach(function(k) {{
+                    var el = document.querySelector('[class*="st-key-psec_' + k + '"]');
+                    if (k === targetKey) {{
+                        if (el) {{ el.classList.remove('psec-force-hide'); el.classList.add('psec-force-show'); }}
+                    }} else {{
+                        if (el) {{ el.classList.add('psec-force-hide'); el.classList.remove('psec-force-show'); }}
+                    }}
+                }});
+                window.scrollTo({{top: 0, behavior: 'instant'}});
+            }} else {{
+                var section = document.getElementById(targetKey + '-section');
+                if (section) {{ section.scrollIntoView({{behavior: 'smooth'}}); }}
+            }}
+        }});
+    }});
+    </script>
+    """, unsafe_allow_javascript=True)
 
     st.markdown("---")
     st.markdown("##### 🔗 Quick Links")
@@ -566,7 +591,7 @@ with st.container(key="psec_home"):
         </div>
     </div>
     <div class="landing-cta-row">
-        <a href="javascript:void(0)" onclick="var el=document.getElementById('about-me'); if(el){{el.scrollIntoView({{behavior:'smooth'}});}}" class="landing-cta-plain">About Me</a>
+        <a href="#about-me" class="landing-cta-plain">About Me</a>
         <span class="landing-social">
             <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>
             <a href="https://github.com/shanweerasinghe3999-cmd" target="_blank">GitHub</a>

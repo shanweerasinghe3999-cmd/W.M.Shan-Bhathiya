@@ -51,6 +51,19 @@ st.markdown("""
         }
     }
 
+    /* Desktop: behave like separate pages (one section visible at a time).
+       Mobile keeps every section visible for continuous top-to-bottom scrolling. */
+    @media (min-width: 641px) {
+        [class*="st-key-psec_experience"],
+        [class*="st-key-psec_projects"],
+        [class*="st-key-psec_certifications"],
+        [class*="st-key-psec_contact"] {
+            display: none;
+        }
+        .psec-force-hide { display: none !important; }
+        .psec-force-show { display: block !important; }
+    }
+
     /* Headers with accent underline */
     h1, h2, h3 { font-weight: 800; letter-spacing: -0.3px; font-family: 'Times New Roman', Georgia, 'Cambria', serif; }
     h2, h3 { border-bottom: 3px solid #4A90D9; padding-bottom: 6px; margin-top: 4px; color: #1B4A7A !important; }
@@ -81,6 +94,15 @@ st.markdown("""
     div[data-testid="stVerticalBlockBorderWrapper"] .stCaption {
         text-align: left !important;
     }
+
+    /* Jump-to-section sidebar nav */
+    .side-nav { display: flex; flex-direction: column; gap: 4px; }
+    .side-nav a {
+        display: block; padding: 9px 12px; border-radius: 8px;
+        color: #1B4A7A !important; font-weight: 600; font-size: 14.5px;
+        text-decoration: none !important;
+    }
+    .side-nav a:hover { background: #DCEAFB; }
 
     /* Sidebar polish */
     section[data-testid="stSidebar"] {
@@ -340,6 +362,8 @@ if dark_mode:
             color: #EAF2FB !important;
         }
         .sidebar-name { color: #EAF2FB !important; }
+        .side-nav a { color: #EAF2FB !important; }
+        .side-nav a:hover { background: #1B4A7A; }
         h1, h2, h3, p, li, span, div, label { color: #EAF2FB; }
         h2, h3 { border-bottom: 3px solid #4A90D9 !important; color: #EAF2FB !important; }
         a, .stMarkdown a { color: #7FB3E8 !important; }
@@ -408,8 +432,36 @@ with st.sidebar:
 
     st.markdown("---")
 
-    # Page navigation
-    page = st.radio("Navigation", ["Home", "Experience", "Projects", "Certifications", "Contact"], index=0, label_visibility="collapsed")
+    # Jump-to-section navigation:
+    # - Desktop (>640px): behaves like separate pages — shows only the clicked section
+    # - Mobile (<=640px): just smooth-scrolls to that section on the single long page
+    NAV_ITEMS = [
+        ("home", "🏠 Home"),
+        ("experience", "🧳 Experience"),
+        ("projects", "🧩 Projects"),
+        ("certifications", "🎓 Certifications"),
+        ("contact", "📩 Contact"),
+    ]
+    ALL_KEYS = [k for k, _ in NAV_ITEMS]
+
+    def _nav_onclick(target_key):
+        hide_show = "".join(
+            f"var e{k}=document.querySelector('[class*=st-key-psec_{k}]');"
+            f"if(e{k}){{e{k}.classList.{'remove' if k == target_key else 'add'}('psec-force-hide');"
+            f"e{k}.classList.{'add' if k == target_key else 'remove'}('psec-force-show');}}"
+            for k in ALL_KEYS
+        )
+        return (
+            f"if(window.innerWidth>640){{{hide_show}window.scrollTo({{top:0,behavior:'instant'}});}}"
+            f"else{{var el=document.getElementById('{target_key}-section');"
+            f"if(el){{el.scrollIntoView({{behavior:'smooth'}});}}}}"
+        )
+
+    nav_links_html = "".join(
+        f'<a href="javascript:void(0)" onclick="{_nav_onclick(key)}">{label}</a>'
+        for key, label in NAV_ITEMS
+    )
+    st.markdown(f'<div class="side-nav">{nav_links_html}</div>', unsafe_allow_html=True)
 
     st.markdown("---")
     st.markdown("##### 🔗 Quick Links")
@@ -428,8 +480,9 @@ with st.sidebar:
     else:
         st.caption("Add 'Shan_CV.pdf' in the app folder to enable CV download")
 
-# -------------------- HOME PAGE --------------------
-if page == "Home":
+st.markdown('<div id="home-section"></div>', unsafe_allow_html=True)
+# -------------------- HOME SECTION --------------------
+with st.container(key="psec_home"):
     photo_html = f'<img src="data:image/jpeg;base64,{_profile_b64}" class="landing-photo">' if _profile_b64 else '<div class="landing-photo landing-photo-placeholder">📷</div>'
 
     _skill_badges = [
@@ -613,8 +666,12 @@ if page == "Home":
     st.write("🌐 [LinkedIn](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
     st.write("💻 [GitHub](https://github.com/shanweerasinghe3999-cmd)")
 
-# -------------------- EXPERIENCE PAGE --------------------
-elif page == "Experience":
+
+    st.markdown("---")
+
+st.markdown('<div id="experience-section"></div>', unsafe_allow_html=True)
+# -------------------- EXPERIENCE SECTION --------------------
+with st.container(key="psec_experience"):
     st.title("🧳 Experience & Education")
 
     col_exp, col_edu = st.columns(2)
@@ -661,8 +718,12 @@ elif page == "Experience":
             st.write("**Computer Literacy Course**")
             st.caption("Open University of Sri Lanka")
 
-# -------------------- PROJECTS PAGE --------------------
-elif page == "Projects":
+
+    st.markdown("---")
+
+st.markdown('<div id="projects-section"></div>', unsafe_allow_html=True)
+# -------------------- PROJECTS SECTION --------------------
+with st.container(key="psec_projects"):
     st.title("🧩 Projects")
 
     with st.container(border=True):
@@ -680,8 +741,12 @@ elif page == "Projects":
         st.link_button("🔗 View Live Project (Demo Version)", "https://thunderous-pastelito-6b0907.netlify.app/login")
         st.caption("Note: this is a demo version of the project.")
 
-# -------------------- CERTIFICATIONS PAGE --------------------
-elif page == "Certifications":
+
+    st.markdown("---")
+
+st.markdown('<div id="certifications-section"></div>', unsafe_allow_html=True)
+# -------------------- CERTIFICATIONS SECTION --------------------
+with st.container(key="psec_certifications"):
     st.title("🎓 Certifications")
     st.caption("Online learning programmes, workshops, and courses completed")
 
@@ -764,8 +829,12 @@ elif page == "Certifications":
                     else:
                         st.markdown('<div class="cert-no-verify">📄 Physical certificate</div>', unsafe_allow_html=True)
 
-# -------------------- CONTACT PAGE --------------------
-elif page == "Contact":
+
+    st.markdown("---")
+
+st.markdown('<div id="contact-section"></div>', unsafe_allow_html=True)
+# -------------------- CONTACT SECTION --------------------
+with st.container(key="psec_contact"):
     st.title("📩 Contact Me")
     st.write("Feel free to send a message — I'll reply as soon as I can!")
 
@@ -822,6 +891,7 @@ elif page == "Contact":
                 wa_text = f"Hi Shan, I'm {name} ({email}).\n\n{message}"
                 wa_url = f"https://wa.me/94789728257?text={quote(wa_text)}"
                 st.link_button("💬 Or send this on WhatsApp instead", wa_url)
+
 
 # -------------------- FOOTER --------------------
 st.markdown("---")

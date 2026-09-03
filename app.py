@@ -695,6 +695,7 @@ elif page == "Certifications":
 
     CERTS = [
         {
+            "group": "University of Moratuwa (CODL)",
             "image": "cert_python_beginners.jpg",
             "title": "Python for Beginners",
             "dept": "Dept. of Computer Science &amp; Engineering, University of Moratuwa",
@@ -704,6 +705,7 @@ elif page == "Certifications":
             "verify_url": "https://open.uom.lk/verify",
         },
         {
+            "group": "University of Moratuwa (CODL)",
             "image": "cert_python_programming.jpg",
             "title": "Python Programming",
             "dept": "Dept. of Computer Science &amp; Engineering, University of Moratuwa",
@@ -713,6 +715,7 @@ elif page == "Certifications":
             "verify_url": "https://open.uom.lk/verify",
         },
         {
+            "group": "University of Moratuwa (CODL)",
             "image": "cert_web_design.jpg",
             "title": "Web Design for Beginners",
             "dept": "Dept. of Information Technology, University of Moratuwa",
@@ -722,6 +725,7 @@ elif page == "Certifications":
             "verify_url": "https://open.uom.lk/verify",
         },
         {
+            "group": "University of Moratuwa (CODL)",
             "image": "cert_frontend_webdev.jpg",
             "title": "Front-End Web Development",
             "dept": "Dept. of Information Technology, University of Moratuwa",
@@ -731,6 +735,7 @@ elif page == "Certifications":
             "verify_url": "https://open.uom.lk/verify",
         },
         {
+            "group": "Other Certifications & Courses",
             "image": "cert_basic_computer.jpg",
             "title": "Basic Computer Course",
             "dept": "Zonal ICT Education Centre, Sri Jayawardhanapura Zone",
@@ -740,6 +745,7 @@ elif page == "Certifications":
             "verify_url": None,
         },
         {
+            "group": "Other Certifications & Courses",
             "image": "cert_computer_literacy.jpg",
             "title": "Computer Literacy",
             "dept": "The Open University of Sri Lanka",
@@ -749,6 +755,7 @@ elif page == "Certifications":
             "verify_url": None,
         },
         {
+            "group": "Other Certifications & Courses",
             "image": "cert_diploma_english.jpg",
             "title": "Diploma in English",
             "dept": "British Way English Academy — Honour pass (Batch 23, 48 hrs, 24 sessions)",
@@ -759,28 +766,37 @@ elif page == "Certifications":
         },
     ]
 
-    rows = [CERTS[i:i + 3] for i in range(0, len(CERTS), 3)]
-    for row in rows:
-        cols = st.columns(3)
-        for col, cert in zip(cols, row):
-            with col:
-                with st.container(border=True):
-                    cert_path = Path(__file__).parent / cert["image"]
-                    if cert_path.exists():
-                        st.image(str(cert_path), use_container_width=True)
-                    st.markdown(f"""
-                    <div class="cert-body">
-                        <div class="cert-title"><h3>{cert['title']}</h3></div>
-                        <div class="cert-dept">{cert['dept']}</div>
-                        <div class="cert-meta">Issued: {cert['issued']}</div>
-                        <div class="cert-meta">{cert['ref_label']}: {cert['ref_value']}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    if cert["verify_url"]:
-                        st.link_button("🔗 Verify", cert["verify_url"])
-                    else:
-                        st.markdown('<div class="cert-no-verify">📄 Physical certificate</div>', unsafe_allow_html=True)
+    # Group certs by institution while keeping their original order
+    GROUPS = []
+    for cert in CERTS:
+        if not GROUPS or GROUPS[-1][0] != cert["group"]:
+            GROUPS.append((cert["group"], []))
+        GROUPS[-1][1].append(cert)
 
+    for group_name, group_certs in GROUPS:
+        st.subheader(group_name)
+        rows = [group_certs[i:i + 3] for i in range(0, len(group_certs), 3)]
+        for row in rows:
+            cols = st.columns(3)
+            for col, cert in zip(cols, row):
+                with col:
+                    with st.container(border=True):
+                        cert_path = Path(__file__).parent / cert["image"]
+                        if cert_path.exists():
+                            st.image(str(cert_path), use_container_width=True)
+                        st.markdown(f"""
+                        <div class="cert-body">
+                            <div class="cert-title"><h3>{cert['title']}</h3></div>
+                            <div class="cert-dept">{cert['dept']}</div>
+                            <div class="cert-meta">Issued: {cert['issued']}</div>
+                            <div class="cert-meta">{cert['ref_label']}: {cert['ref_value']}</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        if cert["verify_url"]:
+                            st.link_button("🔗 Verify", cert["verify_url"])
+                        else:
+                            st.markdown('<div class="cert-no-verify">📄 Physical certificate</div>', unsafe_allow_html=True)
+        st.markdown("")
 
     st.markdown("---")
 

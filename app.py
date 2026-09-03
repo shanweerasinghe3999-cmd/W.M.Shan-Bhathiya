@@ -428,7 +428,6 @@ with st.sidebar:
     else:
         st.caption("Add 'Shan_CV.pdf' in the app folder to enable CV download")
 
-# -------------------- HOME PAGE --------------------
 if page == "Home":
     photo_html = f'<img src="data:image/jpeg;base64,{_profile_b64}" class="landing-photo">' if _profile_b64 else '<div class="landing-photo landing-photo-placeholder">📷</div>'
 
@@ -513,7 +512,7 @@ if page == "Home":
         </div>
     </div>
     <div class="landing-cta-row">
-        <a href="javascript:void(0)" onclick="var el=document.getElementById('about-me'); if(el){{el.scrollIntoView({{behavior:'smooth'}});}}" class="landing-cta-plain">About Me</a>
+        <a href="#about-me" class="landing-cta-plain">About Me</a>
         <span class="landing-social">
             <a href="https://www.linkedin.com/in/shan-bhathiya-1999283ab" target="_blank">LinkedIn</a>
             <a href="https://github.com/shanweerasinghe3999-cmd" target="_blank">GitHub</a>
@@ -613,7 +612,10 @@ if page == "Home":
     st.write("🌐 [LinkedIn](https://www.linkedin.com/in/shan-bhathiya-1999283ab)")
     st.write("💻 [GitHub](https://github.com/shanweerasinghe3999-cmd)")
 
-# -------------------- EXPERIENCE PAGE --------------------
+
+    st.markdown("---")
+
+
 elif page == "Experience":
     st.title("🧳 Experience & Education")
 
@@ -661,7 +663,10 @@ elif page == "Experience":
             st.write("**Computer Literacy Course**")
             st.caption("Open University of Sri Lanka")
 
-# -------------------- PROJECTS PAGE --------------------
+
+    st.markdown("---")
+
+
 elif page == "Projects":
     st.title("🧩 Projects")
 
@@ -680,7 +685,10 @@ elif page == "Projects":
         st.link_button("🔗 View Live Project (Demo Version)", "https://thunderous-pastelito-6b0907.netlify.app/login")
         st.caption("Note: this is a demo version of the project.")
 
-# -------------------- CERTIFICATIONS PAGE --------------------
+
+    st.markdown("---")
+
+
 elif page == "Certifications":
     st.title("🎓 Certifications")
     st.caption("Online learning programmes, workshops, and courses completed")
@@ -740,6 +748,15 @@ elif page == "Certifications":
             "ref_value": "CL2001070",
             "verify_url": None,
         },
+        {
+            "image": "cert_diploma_english.jpg",
+            "title": "Diploma in English",
+            "dept": "British Way English Academy — Honour pass (Batch 23, 48 hrs, 24 sessions)",
+            "issued": "Dec 2022 – Feb 2023",
+            "ref_label": "Status",
+            "ref_value": "Honour Pass",
+            "verify_url": None,
+        },
     ]
 
     rows = [CERTS[i:i + 3] for i in range(0, len(CERTS), 3)]
@@ -764,7 +781,10 @@ elif page == "Certifications":
                     else:
                         st.markdown('<div class="cert-no-verify">📄 Physical certificate</div>', unsafe_allow_html=True)
 
-# -------------------- CONTACT PAGE --------------------
+
+    st.markdown("---")
+
+
 elif page == "Contact":
     st.title("📩 Contact Me")
     st.write("Feel free to send a message — I'll reply as soon as I can!")
@@ -822,6 +842,7 @@ elif page == "Contact":
                 wa_text = f"Hi Shan, I'm {name} ({email}).\n\n{message}"
                 wa_url = f"https://wa.me/94789728257?text={quote(wa_text)}"
                 st.link_button("💬 Or send this on WhatsApp instead", wa_url)
+
 
 # -------------------- FOOTER --------------------
 st.markdown("---")
